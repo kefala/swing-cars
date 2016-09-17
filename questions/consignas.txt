@@ -1,0 +1,24 @@
+Alquiler de automovies
+
+
+1- En un momento dado, un determinado cliente puede tener varias resevas.
+
+2- Código de cliente, DNI, nombre, dirección y teléfono. 
+
+3- La reserva es por cliente, pero pueden alquilarse varios vehiculos
+
+4- Registrar: 
+	a. fecha de inicio y final de la reserva
+	b. precio de cada auto
+	c. litros de gasolina en el deposito en el momento de realizar la reserva
+	d. el precio total de la reserva y un indicador de si el vehiculo o los vehiculos han sido entregados.
+
+5- Todo vehiculo queda disponible en la oficina donde es devuelto hasta que se lo transpore de regreso a su ubicacion original. 
+
+5b - De cada vehiculo se requiere la patente el modelo el color y la marca.
+
+6- Cada reserva se realiza en una determinada oficina, ya sea personalmente o por teléfono
+
+7- Tipos de usuarios: clientes, vendedores y admnistradores
+
+

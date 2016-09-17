@@ -1,0 +1,10 @@
+7 - Tipos de usuario que pueden acceder:
+	Que pueden mirar? Como acceden? 
+	a- Cliente: 
+		solo pueden consultar sobre sus reservas
+	b- Vendedores:
+		podrán administrar reservas y clientes
+	c- Admnistradores:
+		podran administrar a los vendedores, a los clientes, a si mismos y a los autos
+
+5b- Vehiculos, patente, modelo, color(enumerado) y marca(enumerado)
