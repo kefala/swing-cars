@@ -8,3 +8,8 @@
 		podran administrar a los vendedores, a los clientes, a si mismos y a los autos
 
 5b- Vehiculos, patente, modelo, color(enumerado) y marca(enumerado)
+	a - Nafta?
+	b - Estado del auto? se puede usar?
+
+5- Todo vehiculo queda disponible en la oficina donde es devuelto hasta que se lo transpore de regreso a su ubicacion original. 
+	a - Tiempo de demora de translado
