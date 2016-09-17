@@ -1,10 +1,10 @@
-package com.lobo-degue.app;
+package com.degueLobo.app;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
