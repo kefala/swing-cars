@@ -7,6 +7,8 @@ import java.util.List;
  */
 public interface DAOInterface<MODEL_DTO> {
 
+
+
     MODEL_DTO create(MODEL_DTO dto);
 
     void delete(MODEL_DTO dto);
