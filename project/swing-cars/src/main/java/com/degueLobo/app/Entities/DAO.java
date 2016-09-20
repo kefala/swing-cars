@@ -9,17 +9,6 @@ import java.sql.*;
  */
 public abstract class DAO<MODEL_DTO extends DTO> implements DAOInterface<MODEL_DTO> {
     public MODEL_DTO create(MODEL_DTO model) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/java","root","1234asdf");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from emp");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
 
         return null;
     }

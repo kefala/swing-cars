@@ -8,6 +8,9 @@ import com.degueLobo.app.Entities.DAO;
 public class UserDAO extends DAO<UserDTO> {
     private static final String TABLE_NAME = "users";
 
+    public UserDAO() {
+    }
+
     public String getTableName() {
         return TABLE_NAME;
     }

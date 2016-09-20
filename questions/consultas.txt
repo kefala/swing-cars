@@ -1,9 +1,11 @@
-Los administradores pueden administrar reservas? (aviso al cliente?)
-
+Los administradores pueden administrar reservas? 
+No
+(aviso al cliente?)
+No
 Al darlos de alta ya tienen gasolina? Como se maneja el tema de la recarga?
-
+Si
 El auto se puede romper?
-
+No
 Cancelacion de reservas?
-
+Si
 

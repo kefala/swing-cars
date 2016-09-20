@@ -19,9 +19,8 @@ public class App
             String sql = "SELECT * FROM user";
             ResultSet a = stm.executeQuery(sql);
             System.out.printf(a.toString());
-
-            conn.close();
             System.out.printf("TOdo pioli");
+            //DML (data manipulation) && DDL (data definition)
         } catch (SQLException e) {
             e.printStackTrace();
         }
