@@ -14,11 +14,16 @@ public class App
         Connection conn = null;
         Statement stm = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "1234asdf");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/avis", "appuser", "7LB7qBZh6Zjmqz7c");
             stm = conn.createStatement();
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM marca";
             ResultSet a = stm.executeQuery(sql);
-            System.out.printf(a.toString());
+            while(a.next())
+            {
+                int id = a.getInt("id");
+                String marca = a.getString("nombre_marca");
+                System.out.println("ID: " + id + "; Marca: " + marca);
+            }
 
             conn.close();
             System.out.printf("TOdo pioli");
