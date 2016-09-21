@@ -1,5 +1,6 @@
 package com.degueLobo.app.Entities;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -9,16 +10,18 @@ public interface DAOInterface<MODEL_DTO> {
 
 
 
-    MODEL_DTO create(MODEL_DTO dto);
+    MODEL_DTO create(MODEL_DTO dto) throws SQLException;
 
-    void delete(MODEL_DTO dto);
+    void delete(MODEL_DTO dto) throws SQLException;
 
-    List<MODEL_DTO> getAll();
+    List<MODEL_DTO> getAll() throws SQLException;
 
-    MODEL_DTO find(Integer id);
+    MODEL_DTO find(Integer id) throws SQLException;
 
-    void update(MODEL_DTO dto);
-
+    void update(MODEL_DTO dto) throws SQLException;
+    
     Integer getLastId();
+    
+    public String getTableName();
 
 }

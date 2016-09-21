@@ -1,6 +1,12 @@
 package com.degueLobo.app;
 
-import java.sql.*;
+import com.degueLobo.app.Entities.Users.UserDAO;
+import com.degueLobo.app.Entities.Users.UserDTO;
+import com.degueLobo.app.Managers.ConnectionManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Hello world!
@@ -14,17 +20,14 @@ public class App
         Connection conn = null;
         Statement stm = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/avis", "appuser", "7LB7qBZh6Zjmqz7c");
-            stm = conn.createStatement();
-            String sql = "SELECT * FROM marca";
-            ResultSet a = stm.executeQuery(sql);
-            while(a.next())
-            {
-                int id = a.getInt("id");
-                String marca = a.getString("nombre_marca");
-                System.out.println("ID: " + id + "; Marca: " + marca);
-            }
-
+            conn = ConnectionManager.GetConnection();
+            UserDTO user = new UserDTO();
+            UserDAO userDao = new UserDAO(conn);
+            user.setUsername("Pepeeerino");
+            user.setPassword("pass");
+            user.setUserType(2);
+            user = userDao.create(user);
+            System.out.println("User's ID: " + user.getId());
             conn.close();
             System.out.printf("TOdo pioli");
         } catch (SQLException e) {
