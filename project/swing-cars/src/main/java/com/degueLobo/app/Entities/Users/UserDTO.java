@@ -9,24 +9,54 @@ public class UserDTO extends DTO {
     private String username;
     private String password;
 
-    public UserDTO(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private Integer userType;
 
-    public String getUsername() {
+    /**
+     * @return the username
+     */
+    public String getUsername()
+    {
         return username;
     }
 
-    public void setUsername(String username) {
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
-    public String getPassword() {
+    /**
+     * @return the password
+     */
+    public String getPassword()
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password)
+    {
         this.password = password;
     }
+
+    /**
+     * @return the userType
+     */
+    public Integer getUserType()
+    {
+        return userType;
+    }
+
+    /**
+     * @param userType the userType to set
+     */
+    public void setUserType(Integer userType)
+    {
+        this.userType = userType;
+    }
+    
 }
