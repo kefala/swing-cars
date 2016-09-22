@@ -14,8 +14,6 @@ public class UserTest {
 
     @Test
     public void loginTest() {
-        UserDAO user = new UserDAO();
-        System.out.printf(userDto.getUsername());
 
     }
 }
