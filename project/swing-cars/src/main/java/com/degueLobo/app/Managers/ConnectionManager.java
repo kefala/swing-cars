@@ -29,30 +29,11 @@ public class ConnectionManager {
         ConnectionManager.user = user;
         ConnectionManager.password = password;
     }
-    
+    //por lo que hable con corsi esto tiene que se un singleton, por lo que solo tenemos que inicializarlo una vez.
+    //SI podes revisar como lo hizo corsi seria genial.
     public static Connection GetConnection() throws SQLException
     {
         Connection conn = DriverManager.getConnection("jdbc:mysql://" + server + "/" + database, user, password);
         return conn;
     }
 }
-/*
- Connection conn = null;
-        Statement stm = null;
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/avis", "appuser", "7LB7qBZh6Zjmqz7c");
-            stm = conn.createStatement();
-            String sql = "SELECT * FROM marca";
-            ResultSet a = stm.executeQuery(sql);
-            while(a.next())
-            {
-                int id = a.getInt("id");
-                String marca = a.getString("nombre_marca");
-                System.out.println("ID: " + id + "; Marca: " + marca);
-            }
-
-            conn.close();
-            System.out.printf("TOdo pioli");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
