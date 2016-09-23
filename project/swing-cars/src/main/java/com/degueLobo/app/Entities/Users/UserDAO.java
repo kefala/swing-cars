@@ -19,6 +19,10 @@ public class UserDAO extends DAO<UserDTO> {
         super(conn);
     }
 
+    public List<UserDTO> getAll() throws SQLException {
+        return null;
+    }
+
     @Override
     public String getTableName()
     {

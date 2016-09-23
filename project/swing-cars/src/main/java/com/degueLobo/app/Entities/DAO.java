@@ -19,16 +19,12 @@ public abstract class DAO<MODEL_DTO extends DTO> implements DAOInterface<MODEL_D
         st = this.conn.prepareStatement("DELETE FROM " + getTableName()+ " WHERE id = " + id.toString() + ";");
     };
 
-    public List<MODEL_DTO> getAll() throws SQLException {
-        PreparedStatement st = null;
-        st = this.conn.prepareStatement("SELECT * FROM " + getTableName()+ ";");
-        return null;
-    };
-
     public void deleteAll() throws SQLException {
         PreparedStatement st = null;
         st = this.conn.prepareStatement("DELETE FROM " + getTableName()+ " WHERE true = true;");
     };
+
+    public abstract List<MODEL_DTO> getAll() throws SQLException;
     
     public abstract String getTableName();
 

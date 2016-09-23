@@ -1,9 +1,8 @@
-package com.degueLobo.app.Entities.Marca;
+package com.degueLobo.app.Entities.Autos;
 
 /**
  *
  * @author mjdegue
  */
 public class MarcaDAO {
-    
 }
