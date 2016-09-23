@@ -10,6 +10,7 @@ public class AutoDTO extends DTO{
     private AutoBaseDTO base;
     private String patente;
     private OficinaDTO oficinaActual;
+    private Integer gasolina;
 
     public AutoDTO() {
     }
@@ -36,5 +37,13 @@ public class AutoDTO extends DTO{
 
     public void setOficinaActual(OficinaDTO oficinaActual) {
         this.oficinaActual = oficinaActual;
+    }
+
+    public Integer getGasolina() {
+        return gasolina;
+    }
+
+    public void setGasolina(Integer gasolina) {
+        this.gasolina = gasolina;
     }
 }
