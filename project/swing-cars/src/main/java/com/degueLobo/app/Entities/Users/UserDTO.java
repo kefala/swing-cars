@@ -1,6 +1,7 @@
 package com.degueLobo.app.Entities.Users;
 
 import com.degueLobo.app.Entities.DTO;
+import com.degueLobo.app.Entities.Utils.Roles;
 
 /**
  * Created by kefala on 17/09/16.
@@ -8,8 +9,10 @@ import com.degueLobo.app.Entities.DTO;
 public class UserDTO extends DTO {
     private String username;
     private String password;
+    private Roles rol;
 
-    private Integer userType;
+    public UserDTO() {
+    }
 
     /**
      * @return the username
@@ -43,20 +46,11 @@ public class UserDTO extends DTO {
         this.password = password;
     }
 
-    /**
-     * @return the userType
-     */
-    public Integer getUserType()
-    {
-        return userType;
+    public Roles getRol() {
+        return rol;
     }
 
-    /**
-     * @param userType the userType to set
-     */
-    public void setUserType(Integer userType)
-    {
-        this.userType = userType;
+    public void setRol(Roles rol) {
+        this.rol = rol;
     }
-    
 }

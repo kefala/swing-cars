@@ -8,11 +8,9 @@ import java.util.List;
  */
 public interface DAOInterface<MODEL_DTO> {
 
-
-
     MODEL_DTO create(MODEL_DTO dto) throws SQLException;
 
-    void delete(MODEL_DTO dto) throws SQLException;
+    void delete(Integer id) throws SQLException;
 
     List<MODEL_DTO> getAll() throws SQLException;
 
@@ -20,8 +18,6 @@ public interface DAOInterface<MODEL_DTO> {
 
     void update(MODEL_DTO dto) throws SQLException;
     
-    Integer getLastId();
-    
-    public String getTableName();
+    String getTableName();
 
 }
