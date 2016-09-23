@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="961ed70c-fbb0-44ec-af6a-98f590711bc8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoBaseDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/MarcaDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/ModelDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Oficinas/OficinaDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Users/ClientDTO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Marca/MarcaDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/MarcaDAO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Utils/Color.java" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Utils/Colors.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/DAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/DAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Users/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Users/UserDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java" afterPath="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java" />
     </list>
     <ignored path="swing-cars.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,21 +44,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutoDTO.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AutoDTO.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-              <folding />
+            <state relative-caret-position="465">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#373#374#0" expanded="true" />
+                <element signature="e#400#401#0" expanded="true" />
+                <element signature="e#445#446#0" expanded="true" />
+                <element signature="e#477#478#0" expanded="true" />
+                <element signature="e#511#512#0" expanded="true" />
+                <element signature="e#541#542#0" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#625#626#0" expanded="true" />
+                <element signature="e#669#670#0" expanded="true" />
+                <element signature="e#705#706#0" expanded="true" />
+                <element signature="e#767#768#0" expanded="true" />
+                <element signature="e#817#818#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OficinaDTO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OficinaDTO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Oficinas/OficinaDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding>
                 <element signature="e#256#257#0" expanded="true" />
                 <element signature="e#285#286#0" expanded="true" />
@@ -122,8 +126,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/ModelDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/MarcaDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoBaseDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Oficinas/OficinaDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java" />
       </list>
     </option>
   </component>
@@ -942,7 +946,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1474116922419</updated>
-      <workItem from="1474644043308" duration="2253000" />
+      <workItem from="1474644043308" duration="2401000" />
     </task>
     <servers />
   </component>
@@ -952,7 +956,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2253000" />
+    <option name="totallyTimeSpent" value="2401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -1360,23 +1364,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Oficinas/OficinaDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
             <element signature="e#256#257#0" expanded="true" />
             <element signature="e#285#286#0" expanded="true" />
             <element signature="e#329#330#0" expanded="true" />
             <element signature="e#365#366#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/degueLobo/app/Entities/Autos/AutoDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#373#374#0" expanded="true" />
+            <element signature="e#400#401#0" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#511#512#0" expanded="true" />
+            <element signature="e#541#542#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
           </folding>
         </state>
       </provider>
