@@ -1,6 +1,7 @@
 package com.degueLobo.app.Entities.Users;
 
 import com.degueLobo.app.Entities.DAO;
+import com.degueLobo.app.Entities.Utils.Roles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,5 +91,41 @@ public class UserDAO extends DAO<UserDTO> {
 
     public UserDTO find(Integer id) throws SQLException {
         return null;
+    }
+    
+    public UserDTO GetUserIfValid(String userName, String password)
+    {
+        UserDTO user = null;
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM usuario WHERE nombre_usuario=(?) AND password=(?)");
+            st.setString(1, userName);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()) //Should only retrieve one as nombre_usuario is unique
+            {
+                user = new UserDTO();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setRol(Roles.GetRolById(rs.getInt(4)));
+            }
+        }
+        catch(SQLException e)
+        {
+            
+        }
+        finally
+        {
+            if(conn != null)
+            {
+                try
+                {
+                    conn.close();
+                } catch (SQLException e)
+                {
+                    
+                }
+            }
+        }
+        return user;
     }
 }
