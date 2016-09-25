@@ -8,8 +8,6 @@ import javax.swing.*;
 public class mainpanelEJ {
     public static void mostrar() {
         JFrame mainFrame;
-        JTextField usernameTxt;
-        JPasswordField passwordTxt;
         mainFrame = new JFrame("AVIS");
         mainFrame.setSize(1200,768);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
