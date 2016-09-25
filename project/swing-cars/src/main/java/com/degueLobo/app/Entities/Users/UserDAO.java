@@ -106,7 +106,7 @@ public class UserDAO extends DAO<UserDTO> {
                 user = new UserDTO();
                 user.setId(rs.getInt(1));
                 user.setUsername(rs.getString(2));
-                user.setRol(Roles.GetRolById(rs.getInt(4)));
+                user.setRol(Roles.getRolById(rs.getInt(4)));
             }
         }
         catch(SQLException e)

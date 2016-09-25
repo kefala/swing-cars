@@ -1,10 +1,15 @@
 Login
-	Home
+	
 		administrador
-			listado de coches
-			listado de usuario(vendedores y administradores)
+			a. listado de coches
+			b. listado de coche base
+			c. listado de usuario(vendedores y administradores)
+			d. listado de oficinas
 		empleado
-			reservas
-			clientes
-		cliente
+			h. reservas
+			i. clientes
+		clientes
 			sus reservas
+
+		MainContainer
+		View

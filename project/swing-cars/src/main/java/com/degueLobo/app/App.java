@@ -16,6 +16,5 @@ public class App
         LoginView view = new LoginView(model);
         LoginController con = new LoginController(view, model);
         con.start();
-        
     }
 }
