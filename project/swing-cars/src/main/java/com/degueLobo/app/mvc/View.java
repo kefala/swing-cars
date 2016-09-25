@@ -3,7 +3,6 @@
 
 package com.degueLobo.app.mvc;
 
-import com.degueLobo.app.mvc.Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,5 +33,4 @@ public abstract class View {
             mostrarException(event.getActionCommand());
         }
     }
-
 }
