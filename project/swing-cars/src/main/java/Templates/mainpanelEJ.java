@@ -1,4 +1,4 @@
-package com.degueLobo.app;
+package Templates;
 
 import javax.swing.*;
 
