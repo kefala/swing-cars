@@ -1,7 +1,7 @@
 /*Avis
 Lobo/Degue*/
 
-package com.degueLobo.app;
+package com.degueLobo.app.Controllers;
 
 /**
  *

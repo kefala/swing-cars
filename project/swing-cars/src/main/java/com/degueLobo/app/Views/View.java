@@ -1,7 +1,9 @@
 /*Avis
  Lobo/Degue*/
 
-package com.degueLobo.app;
+package com.degueLobo.app.Views;
+
+import com.degueLobo.app.Models.Model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -6,7 +6,6 @@ package com.degueLobo.app.Models;
 import com.degueLobo.app.Entities.Users.UserDAO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Managers.ConnectionManager;
-import com.degueLobo.app.Model;
 
 /**
  *

@@ -1,0 +1,10 @@
+Login
+	Home
+		administrador
+			listado de coches
+			listado de usuario(vendedores y administradores)
+		empleado
+			reservas
+			clientes
+		cliente
+			sus reservas

@@ -6,8 +6,8 @@ Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/
 
 package com.degueLobo.app.Views;
 
-import com.degueLobo.app.Model;
-import com.degueLobo.app.View;
+import com.degueLobo.app.Models.Model;
+
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
