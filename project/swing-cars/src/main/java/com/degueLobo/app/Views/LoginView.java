@@ -25,10 +25,15 @@ public class LoginView extends View {
     private JTextField userName;
     private JPasswordField password;
     private JButton goButton;
+    private MainContainer mContainer;
     
     public LoginView(Model m)
     {
         super(m);
+        
+        mContainer = new MainContainer();
+        
+        
         mainFrame = new JFrame();
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,15 +46,19 @@ public class LoginView extends View {
         panel.add(userName);
         panel.add(password);
         panel.add(goButton);
+        
+        mContainer.pushContentPanel(panel);
+        mContainer.show();
     }
     @Override
     public void mostrar()
-    {
+    {/*
         mainFrame.setTitle("Login View");
         mainFrame.setContentPane(panel);
         mainFrame.pack(); // Ajustar tama�o
         mainFrame.setLocationRelativeTo(null); // Centrar
         mainFrame.setVisible(true);
+*/
     }
 
     public void AddEnterListener(ActionListener al)
@@ -65,6 +74,18 @@ public class LoginView extends View {
     public String GetPassword()
     {
         return String.valueOf(password.getPassword());
+    }
+    
+    public void pushFakeScreen(ActionListener al) {
+        JPanel fakePanel = new JPanel();
+        JButton fakeButton = new JButton("fakeButton");
+        fakeButton.addActionListener(al);
+        fakePanel.add(fakeButton);
+        mContainer.pushContentPanel(fakePanel);
+    }
+    
+    public void popFakeScreen() {
+        mContainer.popContentPanel();
     }
     
     @Override

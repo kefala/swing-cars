@@ -37,8 +37,15 @@ public class LoginController {
             }
             else
             {
+                v.pushFakeScreen(new FakeListener());
                 JOptionPane.showConfirmDialog(null, "Logged failure", "Login info", JOptionPane.OK_OPTION);
             }
         }
-    } 
+    }
+    
+    private class FakeListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            v.popFakeScreen();
+        }
+    }
 }
