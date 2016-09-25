@@ -1,13 +1,12 @@
 /*Avis
 Lobo/Degue*/
 
-package com.degueLobo.app.mvc.models;
+package com.degueLobo.app.Models;
 
 import com.degueLobo.app.Entities.Users.UserDAO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Managers.ConnectionManager;
-import com.degueLobo.app.mvc.Model;
-import java.net.ConnectException;
+import com.degueLobo.app.Model;
 
 /**
  *
@@ -20,7 +19,7 @@ public class LoginModel extends Model{
         UserDTO user = null;
         try
         {
-            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());   
+            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
             user = dao.GetUserIfValid(userName, password);
         } catch (Exception e)
         {

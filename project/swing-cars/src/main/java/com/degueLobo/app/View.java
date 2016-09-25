@@ -1,7 +1,7 @@
 /*Avis
  Lobo/Degue*/
 
-package com.degueLobo.app.mvc;
+package com.degueLobo.app;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -4,10 +4,10 @@ Expression licensePrefix is undefined on line 5, column 3 in Templates/Licenses/
 Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/license-default.txt.and open the template in the editor.
  Lobo/Degue*/
 
-package com.degueLobo.app.mvc.views;
+package com.degueLobo.app.Views;
 
-import com.degueLobo.app.mvc.Model;
-import com.degueLobo.app.mvc.View;
+import com.degueLobo.app.Model;
+import com.degueLobo.app.View;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,7 +47,7 @@ public class LoginView extends View {
     {
         mainFrame.setTitle("Login View");
         mainFrame.setContentPane(panel);
-        mainFrame.pack(); // Ajustar tamaño
+        mainFrame.pack(); // Ajustar tamaï¿½o
         mainFrame.setLocationRelativeTo(null); // Centrar
         mainFrame.setVisible(true);
     }

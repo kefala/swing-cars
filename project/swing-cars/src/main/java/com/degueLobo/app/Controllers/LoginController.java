@@ -1,11 +1,10 @@
 /*Avis
  Lobo/Degue*/
 
-package com.degueLobo.app.mvc.controllers;
+package com.degueLobo.app.Controllers;
 
-import com.degueLobo.app.Entities.Users.UserDAO;
-import com.degueLobo.app.mvc.models.LoginModel;
-import com.degueLobo.app.mvc.views.LoginView;
+import com.degueLobo.app.Models.LoginModel;
+import com.degueLobo.app.Views.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;

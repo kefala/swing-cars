@@ -1,9 +1,8 @@
 package com.degueLobo.app;
 
-import com.degueLobo.app.mvc.Controller;
-import com.degueLobo.app.mvc.controllers.LoginController;
-import com.degueLobo.app.mvc.models.LoginModel;
-import com.degueLobo.app.mvc.views.LoginView;
+import com.degueLobo.app.Controllers.LoginController;
+import com.degueLobo.app.Models.LoginModel;
+import com.degueLobo.app.Views.LoginView;
 
 /**
  * Hello world!
