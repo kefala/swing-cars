@@ -26,7 +26,7 @@ public enum Roles {
         return name;
     }
     
-    public static Roles GetRolById(Integer i)
+    public static Roles getRolById(Integer i)
     {
         switch(i)
         {

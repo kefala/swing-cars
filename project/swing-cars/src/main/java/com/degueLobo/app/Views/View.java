@@ -15,19 +15,19 @@ import java.awt.event.ActionListener;
 public abstract class View {
     private Model m;
     
- public View(Model m) {
+    public View(Model m) {
         this.m = m;
         this.m.addExceptionListener(new ExceptionListener());
     }
  
- public Model getM()
+    public Model getM()
     {
         return m;
     }
  
- public abstract void mostrar();
- 
- public abstract void mostrarException(String exception);
+    public abstract void mostrar();
+
+    public abstract void mostrarException(String exception);
  
     private class ExceptionListener implements ActionListener {
 
