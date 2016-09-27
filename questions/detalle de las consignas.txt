@@ -5,7 +5,7 @@
 	b- Vendedores:
 		podrán administrar reservas y clientes
 	c- Admnistradores:
-		podran administrar a los vendedores, a los clientes, a si mismos y a los autos
+		podran administrar a los vendedores, a si mismos y a los autos
 
 5b- Vehiculos, patente, modelo, color(enumerado) y marca(enumerado)
 	a - Nafta?

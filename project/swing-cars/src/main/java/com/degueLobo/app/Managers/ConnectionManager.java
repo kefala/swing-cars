@@ -1,6 +1,6 @@
 /*Degue Maximiliano, Nicolas Conde, TODO: ADD HERE
  FightingQuestionClub To change this license header, choose License Headers in Project Properties.
- FightingQuestionClub To change this template file, choose Tools | Templates
+ FightingQuestionClub To change this template file, choose Tools | com.degueLobo.app.Templates
  FightingQuestionClub and open the template in the editor.
  The game*/
 

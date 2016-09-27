@@ -25,4 +25,19 @@ public enum Roles {
     public String getName() {
         return name;
     }
+    
+    public static Roles getRolById(Integer i)
+    {
+        switch(i)
+        {
+            case 1:
+                return CLIENTE;
+            case 2:
+                return EMPLEADO;
+            case 3: 
+                return ADMINISTRADOR;
+            default:
+                    return null;
+        }
+    }
 }
