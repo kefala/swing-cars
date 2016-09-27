@@ -29,8 +29,9 @@ public class MainContainer {
     public void show() {
         mainFrame.setTitle("Login View");
         mainFrame.setContentPane(mainPanel);
-        mainFrame.pack(); 
-        mainFrame.setLocationRelativeTo(null); // Centrar
+        mainFrame.pack();
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //mainFrame.setLocationRelativeTo(mainPanel); // Centrar
         mainFrame.setVisible(true);
     }
             
