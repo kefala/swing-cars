@@ -3,8 +3,12 @@
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Templates.Lobo.CustomToolbar;
+import java.awt.BorderLayout;
 import java.util.Stack;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -12,39 +16,68 @@ import javax.swing.SwingUtilities;
  *
  * @author mjdegue
  */
-public class MainContainer {
-    private JPanel sideBar;
-    private JPanel bottomMenu;
-    private Stack<JPanel> contentPanelStack;
-    private JPanel currentContentPanel;
+public class MainContainer extends JFrame {
+    private JComponent sideBar;
+    private JComponent bottomMenu;
+    private Stack<View> contentPanelStack;
+    private View currentView;
     private JPanel mainPanel;
-    private JFrame mainFrame;
+    private JComponent toolbar;
     
     public MainContainer() {
         mainPanel = new JPanel();
-        mainFrame = new JFrame();
-        contentPanelStack = new Stack<JPanel>();
+        contentPanelStack = new Stack<View>();
     }
     
-    public void show() {
-        mainFrame.setTitle("Login View");
-        mainFrame.setContentPane(mainPanel);
-        mainFrame.pack();
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //mainFrame.setLocationRelativeTo(mainPanel); // Centrar
-        mainFrame.setVisible(true);
+    public void initialize() {
+        setLayout(new BorderLayout());
+        setTitle("Login View");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        initializeComponents();
     }
-            
     
-    public void setSideBar(JPanel sideBar) {
+    private void initializeComponents() {
+    
+        if(toolbar == null) {
+            toolbar = new CustomToolbar();
+        }
+        
+        add(toolbar, BorderLayout.PAGE_START);
+        
+        if(sideBar != null) {
+            add(sideBar, BorderLayout.LINE_START);
+        }
+        
+        if(bottomMenu != null) {
+            add(bottomMenu, BorderLayout.PAGE_END);
+        }
+    }
+    
+    public void setSideBar(JComponent sideBar) {
         this.sideBar = sideBar;
+        initializeComponents();
+    }
+    
+    public void removeSideBar() {
+        remove(this.sideBar);
+        this.sideBar = null;
+        updateScreen();
+    }
+    
+    public void setSideBar(View sideBar) {
+        this.sideBar = sideBar.getControlPanel();
+        initializeComponents();
+    }
+    
+    public void setTopMenu(JMenuBar mb) {
+        setJMenuBar(mb);
     }
     
     public void setBottomMenu(JPanel bottomMenu) {
         this.bottomMenu = bottomMenu;
     }
     
-    public void pushContentPanel(JPanel contentPanel) {
+    public void pushContentPanel(View contentPanel) {
         this.contentPanelStack.push(contentPanel);
         updateScreen();
     }
@@ -54,32 +87,19 @@ public class MainContainer {
         updateScreen();
     }
     
-    public void initialize() {
-        if(sideBar != null) {
-            mainPanel.add(sideBar);
-        }
-        
-        if(bottomMenu != null) {
-            mainPanel.add(bottomMenu);
-        }
-        
-        if(!contentPanelStack.empty()){
-            mainPanel.add(contentPanelStack.lastElement());
-        }
-    }
-    
     private void updateScreen() {
-        if(currentContentPanel != null) {
-            mainPanel.remove(currentContentPanel);
+        if(currentView != null) {
+            remove(currentView.getControlPanel());
+            currentView.onHide();
         }
         
         if(!contentPanelStack.empty())
         {
-            currentContentPanel = contentPanelStack.lastElement();
-            mainPanel.add(currentContentPanel);
-            SwingUtilities.updateComponentTreeUI(mainPanel);
+            currentView = contentPanelStack.lastElement();
+            currentView.onShow();
+            add(currentView.getControlPanel(), BorderLayout.CENTER);
         }
-        
+        SwingUtilities.updateComponentTreeUI(this);
     }
     
 }

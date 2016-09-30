@@ -2,6 +2,7 @@ package com.degueLobo.app.Entities.Users;
 
 import com.degueLobo.app.Entities.DAO;
 import com.degueLobo.app.Entities.Utils.Roles;
+import com.degueLobo.app.Managers.ErrorManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -111,7 +112,7 @@ public class UserDAO extends DAO<UserDTO> {
         }
         catch(SQLException e)
         {
-            
+            ErrorManager.PopupException(e);
         }
         finally
         {
@@ -122,7 +123,7 @@ public class UserDAO extends DAO<UserDTO> {
                     conn.close();
                 } catch (SQLException e)
                 {
-                    
+                    ErrorManager.PopupException(e);
                 }
             }
         }
