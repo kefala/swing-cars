@@ -7,6 +7,7 @@ import com.degueLobo.app.Models.Model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,25 +15,23 @@ import java.awt.event.ActionListener;
  */
 public abstract class View {
     private Model m;
-    
+    protected JPanel controlPanel;
     public View(Model m) {
         this.m = m;
-        this.m.addExceptionListener(new ExceptionListener());
+        controlPanel = new JPanel();
     }
  
+    public JPanel getControlPanel() {
+        return controlPanel;
+    }
+    
     public Model getM()
     {
         return m;
     }
  
-    public abstract void mostrar();
-
-    public abstract void mostrarException(String exception);
- 
-    private class ExceptionListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent event) {
-            mostrarException(event.getActionCommand());
-        }
-    }
+    public abstract void onShow();
+    
+    public abstract void onHide();
+    
 }

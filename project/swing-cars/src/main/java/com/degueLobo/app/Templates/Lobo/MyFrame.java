@@ -9,14 +9,14 @@ import javax.swing.*;
  */
 public class MyFrame extends JFrame {
     private JLabel facha, fachita;
-    private MyToolbar fachota;
+    private CustomToolbar fachota;
 
     public MyFrame() {
         super("Titulo de pagina");
 
         setLayout(new BorderLayout());
 
-        fachota = new MyToolbar();
+        fachota = new CustomToolbar();
         facha = new JLabel("Facha");
         fachita = new JLabel("Fachita");
 

@@ -3,7 +3,11 @@
 
 package com.degueLobo.app.Controllers;
 
+import com.degueLobo.app.Entities.Users.UserDTO;
+import com.degueLobo.app.Managers.ApplicationManager;
+import com.degueLobo.app.Models.FakeButtonModel;
 import com.degueLobo.app.Models.LoginModel;
+import com.degueLobo.app.Views.FakeButtonView;
 import com.degueLobo.app.Views.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,29 +27,23 @@ public class LoginController {
     }
     
     public void start() {
-        v.mostrar();
         v.AddEnterListener(new LoginListener());
     }
     
     private class LoginListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            boolean b = m.ConfirmLogin(v.GetUsername(), v.GetPassword());
+            UserDTO user = m.logUserIn(v.GetUsername(), v.GetPassword());
             
-            if(b)
+            if(user != null)
             {
-                JOptionPane.showConfirmDialog(null, "Logged in correctly", "Login info", JOptionPane.OK_OPTION);
+                ApplicationManager.setCurrentUser(user);
+                ApplicationManager.getMainAppContainer().removeSideBar();
             }
             else
             {
-                v.pushFakeScreen(new FakeListener());
-                JOptionPane.showConfirmDialog(null, "Logged failure", "Login info", JOptionPane.OK_OPTION);
+                JOptionPane.showConfirmDialog(null, "User or password invalid", "Login info", JOptionPane.DEFAULT_OPTION);
             }
         }
     }
     
-    private class FakeListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            v.popFakeScreen();
-        }
-    }
 }
