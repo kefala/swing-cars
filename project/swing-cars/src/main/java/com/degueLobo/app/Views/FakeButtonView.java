@@ -21,7 +21,7 @@ public class FakeButtonView extends View{
         super(m);
         
         fakeButton = new JButton("fakeButton");
-        controlPanel.add(fakeButton);
+        //controlPanel.add(fakeButton);
     }
 
     public void AddFakeButtonListener(ActionListener al) {

@@ -5,6 +5,7 @@ package com.degueLobo.app.Views;
 
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
+import com.degueLobo.app.Templates.Lobo.LoginSideBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;
@@ -26,50 +27,34 @@ import javax.swing.JTextField;
  * @author mjdegue
  */
 public class LoginView extends View {
-    private JFrame mainFrame;
-    private JTextField userName;
-    private JPasswordField password;
-    private JButton goButton;
-
+    private LoginSideBar loginSideBar;
     
     public LoginView(Model m)
     {
         super(m);
         
+        loginSideBar = new LoginSideBar();
+        
         MainContainer mainContainer = ApplicationManager.getMainAppContainer();
         
-        mainFrame = new JFrame();
-        mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        userName = new JTextField(10);
-        password = new JPasswordField(10);
-        goButton = new JButton("enter");
         
-        JPanel innerPanel = new JPanel();
-        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
-        innerPanel.add(userName);
-        innerPanel.add(password);
-        innerPanel.add(goButton);
-        controlPanel.add(innerPanel);
-        
-        mainContainer.setSideBar(this);
+        mainContainer.setSideBar(loginSideBar);
         mainContainer.setVisible(true);
     }
     
     public void AddEnterListener(ActionListener al)
     {
-        goButton.addActionListener(al);
+        loginSideBar.AddEnterListener(al);
     }
     
     public String GetUsername()
     {
-        return userName.getText();
+        return loginSideBar.getUserName();
     }
     
     public String GetPassword()
     {
-        return String.valueOf(password.getPassword());
+        return loginSideBar.getPassword();
     }
     
     public void pushFakeScreen(ActionListener al) {
