@@ -4,7 +4,7 @@
 package com.degueLobo.app.Views;
 
 import com.degueLobo.app.Templates.SideBar.CustomSideBar;
-import com.degueLobo.app.Templates.Lobo.CustomToolbar;
+import com.degueLobo.app.Templates.Toolbar.CustomToolbar;
 import java.awt.BorderLayout;
 import java.util.Stack;
 import javax.swing.JComponent;
@@ -52,6 +52,7 @@ public class MainContainer extends JFrame {
         if(bottomMenu != null) {
             add(bottomMenu, BorderLayout.PAGE_END);
         }
+        updateScreen();
     }
     
     public void setSideBar(JComponent sideBar) {
@@ -65,7 +66,18 @@ public class MainContainer extends JFrame {
         updateScreen();
     }
     
+    public void setToolBar(CustomToolbar toolbar) {
+        if(this.toolbar != null) {
+            remove(this.toolbar);
+        }
+        this.toolbar = toolbar;
+        initializeComponents();
+    }
+    
     public void setSideBar(CustomSideBar sideBar) {
+        if(this.sideBar != null) {
+            remove(this.sideBar);
+        }
         this.sideBar = sideBar.getControlPanel();
         initializeComponents();
     }

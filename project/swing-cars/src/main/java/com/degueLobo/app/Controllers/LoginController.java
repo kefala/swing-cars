@@ -5,9 +5,9 @@ package com.degueLobo.app.Controllers;
 
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Managers.ApplicationManager;
-import com.degueLobo.app.Models.FakeButtonModel;
 import com.degueLobo.app.Models.LoginModel;
-import com.degueLobo.app.Views.FakeButtonView;
+import com.degueLobo.app.Templates.SideBar.AdminSideBar;
+import com.degueLobo.app.Templates.Toolbar.AdminToolBar;
 import com.degueLobo.app.Views.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +24,6 @@ public class LoginController {
     public LoginController(LoginView v, LoginModel m) {
         this.v = v;
         this.m = m;
-    }
-    
-    public void start() {
         v.AddEnterListener(new LoginListener());
     }
     
@@ -37,7 +34,13 @@ public class LoginController {
             if(user != null)
             {
                 ApplicationManager.setCurrentUser(user);
-                ApplicationManager.getMainAppContainer().removeSideBar();
+                
+                //This all should be moved somewhere else. For now is for testing :)
+//                ApplicationManager.getMainAppContainer().setSideBar(new AdminSideBar());
+                ApplicationManager.prepareAdminScreen();
+                AdminToolBar toolbar = new AdminToolBar();
+                toolbar.initialize();
+                ApplicationManager.getMainAppContainer().setToolBar(toolbar);
             }
             else
             {

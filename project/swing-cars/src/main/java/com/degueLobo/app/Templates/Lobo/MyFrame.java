@@ -1,5 +1,6 @@
 package com.degueLobo.app.Templates.Lobo;
 
+import com.degueLobo.app.Templates.Toolbar.CustomToolbar;
 import java.awt.*;
 
 import javax.swing.*;
