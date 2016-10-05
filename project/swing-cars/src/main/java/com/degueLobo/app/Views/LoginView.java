@@ -5,7 +5,7 @@ package com.degueLobo.app.Views;
 
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
-import com.degueLobo.app.Templates.Lobo.LoginSideBar;
+import com.degueLobo.app.Templates.SideBar.LoginSideBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.LayoutManager;

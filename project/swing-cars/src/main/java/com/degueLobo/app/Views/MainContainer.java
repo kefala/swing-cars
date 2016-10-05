@@ -3,7 +3,7 @@
 
 package com.degueLobo.app.Views;
 
-import com.degueLobo.app.Templates.Lobo.CustomSideBar;
+import com.degueLobo.app.Templates.SideBar.CustomSideBar;
 import com.degueLobo.app.Templates.Lobo.CustomToolbar;
 import java.awt.BorderLayout;
 import java.util.Stack;
