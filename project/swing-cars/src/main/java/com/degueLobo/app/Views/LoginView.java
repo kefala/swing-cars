@@ -6,6 +6,7 @@ package com.degueLobo.app.Views;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
 import com.degueLobo.app.Templates.SideBar.LoginSideBar;
+import com.degueLobo.app.Templates.Toolbar.CustomToolbar;
 
 import java.awt.event.ActionListener;
 
@@ -26,6 +27,7 @@ public class LoginView extends View {
         
         
         mainContainer.setSideBar(loginSideBar);
+        mainContainer.setToolBar(new CustomToolbar());
         mainContainer.setVisible(true);
     }
     
@@ -43,11 +45,7 @@ public class LoginView extends View {
     {
         return loginSideBar.getPassword();
     }
-    
-    public void pushFakeScreen(ActionListener al) {
-        ApplicationManager.getMainAppContainer().pushContentPanel(new FakeButtonView(getM()));
-    }
-    
+        
     @Override
     public void onShow()
     {

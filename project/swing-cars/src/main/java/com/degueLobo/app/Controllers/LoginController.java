@@ -36,11 +36,8 @@ public class LoginController {
                 ApplicationManager.setCurrentUser(user);
                 
                 //This all should be moved somewhere else. For now is for testing :)
-//                ApplicationManager.getMainAppContainer().setSideBar(new AdminSideBar());
-                ApplicationManager.prepareAdminScreen();
-                AdminToolBar toolbar = new AdminToolBar();
-                toolbar.initialize();
-                ApplicationManager.getMainAppContainer().setToolBar(toolbar);
+                //ApplicationManager.getMainAppContainer().setSideBar(new AdminSideBar());
+                ApplicationManager.prepareAdminLayout();
             }
             else
             {

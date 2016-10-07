@@ -5,6 +5,7 @@ package com.degueLobo.app.Controllers;
 
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.AdminModel;
+import com.degueLobo.app.Templates.Toolbar.AdminToolBar;
 import com.degueLobo.app.Views.AdminView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,9 @@ public class AdminController extends Controller {
         this.view = view;
         
         view.addLogOutListener(new LogOutEventListener());
+        AdminToolBar toolbar = new AdminToolBar();
+        toolbar.initialize();
+        ApplicationManager.getMainAppContainer().setToolBar(toolbar);
     }
     
     private class LogOutEventListener implements ActionListener {

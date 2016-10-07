@@ -20,14 +20,14 @@ import javax.swing.SwingUtilities;
 public class MainContainer extends JFrame {
     private JComponent sideBar;
     private JComponent bottomMenu;
-    private Stack<View> contentPanelStack;
-    private View currentView;
+    private Stack<JFrame> contentPanelStack;
+    private JFrame currentView;
     private JPanel mainPanel;
     private JComponent toolbar;
     
     public MainContainer() {
         mainPanel = new JPanel();
-        contentPanelStack = new Stack<View>();
+        contentPanelStack = new Stack<JFrame>();
     }
     
     public void initialize() {
@@ -90,7 +90,7 @@ public class MainContainer extends JFrame {
         this.bottomMenu = bottomMenu;
     }
     
-    public void pushContentPanel(View contentPanel) {
+    public void pushContentPanel(JFrame contentPanel) {
         this.contentPanelStack.push(contentPanel);
         updateScreen();
     }
@@ -100,16 +100,20 @@ public class MainContainer extends JFrame {
         updateScreen();
     }
     
+    public void resetContentPanelStatus() {
+        contentPanelStack.clear();
+        updateScreen();
+    }
+    
     private void updateScreen() {
         if(currentView != null) {
-            //remove(currentView.getControlPanel());
-            currentView.onHide();
+            //currentView.onHide();
         }
         
         if(!contentPanelStack.empty())
         {
             currentView = contentPanelStack.lastElement();
-            currentView.onShow();
+            //currentView.onShow();
             //add(currentView.getControlPanel(), BorderLayout.CENTER);
         }
         SwingUtilities.updateComponentTreeUI(this);

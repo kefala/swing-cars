@@ -43,22 +43,26 @@ public class ApplicationManager {
             //Might logic based on role should be implemented here
             currentUser = null;
         }
-        prepareLoginScreen();
+        prepareLoginLayout();
     }
     
     public static void startApplication() {
-        prepareLoginScreen();
+        prepareLoginLayout();
     }
     
-    public static void prepareLoginScreen() {
+    public static void prepareLoginLayout() {
         LoginModel model = new LoginModel();
         LoginView view = new LoginView(model);
         new LoginController(view, model);
     }
     
-    public static void prepareAdminScreen() {
+    public static void prepareAdminLayout() {
         AdminModel model = new AdminModel();
         AdminView view = new AdminView(model);
         new AdminController(model, view);
+    }
+    
+    private static void resetScreenStatus(){
+        getMainAppContainer().popContentPanel();
     }
 }
