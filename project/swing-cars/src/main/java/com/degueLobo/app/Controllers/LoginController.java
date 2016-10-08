@@ -4,6 +4,7 @@
 package com.degueLobo.app.Controllers;
 
 import com.degueLobo.app.Entities.Users.UserDTO;
+import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.LoginModel;
 import com.degueLobo.app.Templates.SideBar.AdminSideBar;
@@ -37,7 +38,11 @@ public class LoginController {
                 
                 //This all should be moved somewhere else. For now is for testing :)
                 //ApplicationManager.getMainAppContainer().setSideBar(new AdminSideBar());
-                ApplicationManager.prepareAdminLayout();
+                if(user.getRol() == Roles.ADMINISTRADOR) {
+                    ApplicationManager.prepareAdminLayout();
+                } else {
+                    JOptionPane.showConfirmDialog(null, "Aun no hay otro rol que no sea ADMIN", "Login info", JOptionPane.DEFAULT_OPTION);
+                }
             }
             else
             {

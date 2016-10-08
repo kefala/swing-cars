@@ -14,6 +14,12 @@ public class UserDTO extends DTO {
     public UserDTO() {
     }
 
+    public UserDTO(String user, String pass, Roles rol) {
+        this.username = user;
+        this.password = pass;
+        this.rol = rol;
+    }
+
     /**
      * @return the username
      */

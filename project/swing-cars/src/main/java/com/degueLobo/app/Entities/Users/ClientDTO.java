@@ -8,9 +8,9 @@ import com.degueLobo.app.Entities.Utils.Roles;
  */
 public class ClientDTO extends DTO {
     private String name;
-    private Integer dni;
-    private Integer telefono;
-    private Integer direccion;
+    private String dni;
+    private String telefono;
+    private String direccion;
     private UserDTO user;
 
     public ClientDTO() {
@@ -18,6 +18,13 @@ public class ClientDTO extends DTO {
         user.setRol(Roles.CLIENTE);
     }
 
+    public ClientDTO(String userName, String password, String nombre, String dni, String direccion, String telefono) {
+        this.name = nombre;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        user = new UserDTO(userName, password, Roles.CLIENTE);
+    }
     public String getName() {
         return name;
     }
@@ -26,27 +33,27 @@ public class ClientDTO extends DTO {
         this.name = name;
     }
 
-    public Integer getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Integer dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public Integer getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Integer direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 

@@ -43,4 +43,6 @@ public class AdminSideBar extends CustomSideBar {
     public void addLogOutButtonListener(ActionListener al) {
         logOut.addActionListener(al);
     }
+    
+    
 }

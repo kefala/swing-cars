@@ -3,6 +3,7 @@
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Templates.ContentView.CustomContentView;
 import com.degueLobo.app.Templates.SideBar.CustomSideBar;
 import com.degueLobo.app.Templates.Toolbar.CustomToolbar;
 import java.awt.BorderLayout;
@@ -20,14 +21,14 @@ import javax.swing.SwingUtilities;
 public class MainContainer extends JFrame {
     private JComponent sideBar;
     private JComponent bottomMenu;
-    private Stack<JFrame> contentPanelStack;
-    private JFrame currentView;
+    private Stack<CustomContentView> contentPanelStack;
+    private CustomContentView currentView;
     private JPanel mainPanel;
     private JComponent toolbar;
     
     public MainContainer() {
         mainPanel = new JPanel();
-        contentPanelStack = new Stack<JFrame>();
+        contentPanelStack = new Stack<CustomContentView>();
     }
     
     public void initialize() {
@@ -90,7 +91,7 @@ public class MainContainer extends JFrame {
         this.bottomMenu = bottomMenu;
     }
     
-    public void pushContentPanel(JFrame contentPanel) {
+    public void pushContentPanel(CustomContentView contentPanel) {
         this.contentPanelStack.push(contentPanel);
         updateScreen();
     }
@@ -107,6 +108,7 @@ public class MainContainer extends JFrame {
     
     private void updateScreen() {
         if(currentView != null) {
+            remove(currentView.getControlPanel());
             //currentView.onHide();
         }
         
@@ -114,7 +116,7 @@ public class MainContainer extends JFrame {
         {
             currentView = contentPanelStack.lastElement();
             //currentView.onShow();
-            //add(currentView.getControlPanel(), BorderLayout.CENTER);
+            add(currentView.getControlPanel(), BorderLayout.CENTER);
         }
         SwingUtilities.updateComponentTreeUI(this);
     }

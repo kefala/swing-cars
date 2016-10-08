@@ -4,7 +4,7 @@ Expression licensePrefix is undefined on line 5, column 3 in Templates/Licenses/
 Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/license-default.txt.and open the template in the editor.
  Lobo/Degue*/
 
-package com.degueLobo.app.Templates.SideBar;
+package com.degueLobo.app.Templates.ContentView;
 
 import javax.swing.JPanel;
 
@@ -12,14 +12,15 @@ import javax.swing.JPanel;
  *
  * @author mjdegue
  */
-public class CustomSideBar extends JPanel {
+public class CustomContentView {
     protected JPanel controlPanel;
     
-    CustomSideBar(){
+    protected CustomContentView(){
         controlPanel = new JPanel();
     }
     
     public JPanel getControlPanel() {
         return controlPanel;
     }
+
 }
