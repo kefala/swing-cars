@@ -1,4 +1,4 @@
-package com.degueLobo.app.Templates.Lobo;
+package com.degueLobo.app.Templates.Toolbar;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class CustomToolbar extends JPanel {
 
-    JLabel title;
+    private JLabel title;
 
     public CustomToolbar() {
         setBackground(Color.black);
@@ -23,5 +23,9 @@ public class CustomToolbar extends JPanel {
         title.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         add(title, BorderLayout.WEST);
+    }
+    
+    public void setTitle(String title) {
+        this.title.setText(title);
     }
 }

@@ -6,9 +6,9 @@ package com.degueLobo.app.Entities.Utils;
 public enum Roles {
     //clase estaticamente parametrizada :P
 
-    CLIENTE(1, "Cliente"),
+    ADMINISTRADOR(1, "Administrador"),
     EMPLEADO(2, "Empleado"),
-    ADMINISTRADOR(3, "Administrador");
+    CLIENTE(3, "Cliente");
 
     private final Integer id;
     private final String name;
@@ -31,13 +31,13 @@ public enum Roles {
         switch(i)
         {
             case 1:
-                return CLIENTE;
+                return ADMINISTRADOR;
             case 2:
                 return EMPLEADO;
             case 3: 
-                return ADMINISTRADOR;
+                return CLIENTE;
             default:
-                    return null;
+                return null;
         }
     }
 }

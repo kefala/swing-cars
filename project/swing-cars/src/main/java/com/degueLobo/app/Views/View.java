@@ -15,16 +15,10 @@ import javax.swing.JPanel;
  */
 public abstract class View {
     private Model m;
-    protected JPanel controlPanel;
     public View(Model m) {
         this.m = m;
-        controlPanel = new JPanel();
     }
  
-    public JPanel getControlPanel() {
-        return controlPanel;
-    }
-    
     public Model getM()
     {
         return m;

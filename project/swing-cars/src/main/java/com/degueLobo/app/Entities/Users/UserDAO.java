@@ -14,11 +14,10 @@ import java.util.List;
  * Created by kefala on 17/09/16.
  */
 public class UserDAO extends DAO<UserDTO> {
-    private final String TABLE_NAME = "usuario";
 
     public UserDAO(Connection conn)
     {
-        super(conn);
+        super(conn, "usuario");
     }
 
     public List<UserDTO> getAll() throws SQLException {
@@ -26,14 +25,9 @@ public class UserDAO extends DAO<UserDTO> {
     }
 
     @Override
-    public String getTableName()
-    {
-        return TABLE_NAME;
-    }
-
-    @Override
     public UserDTO create(UserDTO model) throws SQLException
     {
+        UserDTO newModel = null;
         PreparedStatement st = null;
         try
         {
@@ -47,6 +41,7 @@ public class UserDAO extends DAO<UserDTO> {
                 ResultSet results = st.getGeneratedKeys();
                 results.next();
                 model.setId(results.getInt(1));
+                newModel = model;
             }
             catch(SQLException e)
             {
@@ -58,7 +53,7 @@ public class UserDAO extends DAO<UserDTO> {
             System.err.println("Couldn't insert new user");
             throw e;
         }
-        return model;
+        return newModel;
     }
 
     @Override

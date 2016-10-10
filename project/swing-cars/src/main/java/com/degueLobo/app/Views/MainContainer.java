@@ -3,7 +3,9 @@
 
 package com.degueLobo.app.Views;
 
-import com.degueLobo.app.Templates.Lobo.CustomToolbar;
+import com.degueLobo.app.Templates.ContentView.CustomContentView;
+import com.degueLobo.app.Templates.SideBar.CustomSideBar;
+import com.degueLobo.app.Templates.Toolbar.CustomToolbar;
 import java.awt.BorderLayout;
 import java.util.Stack;
 import javax.swing.JComponent;
@@ -19,14 +21,14 @@ import javax.swing.SwingUtilities;
 public class MainContainer extends JFrame {
     private JComponent sideBar;
     private JComponent bottomMenu;
-    private Stack<View> contentPanelStack;
-    private View currentView;
+    private Stack<CustomContentView> contentPanelStack;
+    private CustomContentView currentView;
     private JPanel mainPanel;
     private JComponent toolbar;
     
     public MainContainer() {
         mainPanel = new JPanel();
-        contentPanelStack = new Stack<View>();
+        contentPanelStack = new Stack<CustomContentView>();
     }
     
     public void initialize() {
@@ -51,6 +53,7 @@ public class MainContainer extends JFrame {
         if(bottomMenu != null) {
             add(bottomMenu, BorderLayout.PAGE_END);
         }
+        updateScreen();
     }
     
     public void setSideBar(JComponent sideBar) {
@@ -64,7 +67,18 @@ public class MainContainer extends JFrame {
         updateScreen();
     }
     
-    public void setSideBar(View sideBar) {
+    public void setToolBar(CustomToolbar toolbar) {
+        if(this.toolbar != null) {
+            remove(this.toolbar);
+        }
+        this.toolbar = toolbar;
+        initializeComponents();
+    }
+    
+    public void setSideBar(CustomSideBar sideBar) {
+        if(this.sideBar != null) {
+            remove(this.sideBar);
+        }
         this.sideBar = sideBar.getControlPanel();
         initializeComponents();
     }
@@ -77,7 +91,7 @@ public class MainContainer extends JFrame {
         this.bottomMenu = bottomMenu;
     }
     
-    public void pushContentPanel(View contentPanel) {
+    public void pushContentPanel(CustomContentView contentPanel) {
         this.contentPanelStack.push(contentPanel);
         updateScreen();
     }
@@ -87,16 +101,21 @@ public class MainContainer extends JFrame {
         updateScreen();
     }
     
+    public void resetContentPanelStatus() {
+        contentPanelStack.clear();
+        updateScreen();
+    }
+    
     private void updateScreen() {
         if(currentView != null) {
             remove(currentView.getControlPanel());
-            currentView.onHide();
+            //currentView.onHide();
         }
         
         if(!contentPanelStack.empty())
         {
             currentView = contentPanelStack.lastElement();
-            currentView.onShow();
+            //currentView.onShow();
             add(currentView.getControlPanel(), BorderLayout.CENTER);
         }
         SwingUtilities.updateComponentTreeUI(this);
