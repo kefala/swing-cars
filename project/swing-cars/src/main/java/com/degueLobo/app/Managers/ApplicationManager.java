@@ -4,11 +4,15 @@
 package com.degueLobo.app.Managers;
 
 import com.degueLobo.app.Controllers.AdminController;
+import com.degueLobo.app.Controllers.EmpleadoController;
 import com.degueLobo.app.Controllers.LoginController;
+import com.degueLobo.app.Entities.Oficinas.OficinaDTO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Models.AdminModel;
+import com.degueLobo.app.Models.EmpleadoModel;
 import com.degueLobo.app.Models.LoginModel;
 import com.degueLobo.app.Views.AdminView;
+import com.degueLobo.app.Views.EmpleadoView;
 import com.degueLobo.app.Views.LoginView;
 import com.degueLobo.app.Views.MainContainer;
 import javax.swing.JFrame;
@@ -19,6 +23,7 @@ import javax.swing.JFrame;
  */
 public class ApplicationManager {
     private static UserDTO currentUser;
+    private static OficinaDTO oficinaLocal;
     private static MainContainer mainAppContainer;
     
     public static MainContainer getMainAppContainer(){
@@ -64,8 +69,30 @@ public class ApplicationManager {
         AdminView view = new AdminView(model);
         new AdminController(model, view);
     }
+
+    public static void prepareEmpleadoLayout() {
+        EmpleadoModel model = new EmpleadoModel();
+        EmpleadoView view = new EmpleadoView(model);
+        new EmpleadoController(view, model);
+    }
     
     private static void resetScreenStatus() {
         getMainAppContainer().resetContentPanelStatus();
+    }
+
+    /**
+     * @return the oficinaLocal
+     */
+    public static OficinaDTO getOficinaLocal()
+    {
+        return oficinaLocal;
+    }
+
+    /**
+     * @param aOficinaLocal the oficinaLocal to set
+     */
+    public static void setOficinaLocal(OficinaDTO aOficinaLocal)
+    {
+        oficinaLocal = aOficinaLocal;
     }
 }

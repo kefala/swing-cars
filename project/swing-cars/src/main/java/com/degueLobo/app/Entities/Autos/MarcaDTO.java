@@ -7,8 +7,7 @@ import com.degueLobo.app.Entities.DTO;
  */
 public class MarcaDTO extends DTO {
     private String name;
-    private String shortName;
-
+    
     public MarcaDTO() {
     }
 
@@ -20,11 +19,4 @@ public class MarcaDTO extends DTO {
         this.name = name;
     }
 
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
 }

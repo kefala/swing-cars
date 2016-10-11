@@ -40,4 +40,9 @@ public enum Roles {
                 return null;
         }
     }
+    
+    public static Roles[] getRolesVector(){
+        Roles[] roleList = {Roles.ADMINISTRADOR, Roles.EMPLEADO, Roles.CLIENTE};
+        return roleList;
+    }
 }

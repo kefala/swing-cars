@@ -1,6 +1,10 @@
+/*Avis
+Lobo/Degue*/
+
 package com.degueLobo.app.Entities.Autos;
 
 import com.degueLobo.app.Entities.DAO;
+import com.degueLobo.app.Entities.Utils.Colors;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,34 +17,39 @@ import java.util.List;
  *
  * @author mjdegue
  */
-public class MarcaDAO extends DAO<MarcaDTO>{
+public class AutoBaseDAO extends DAO<AutoBaseDTO>{
 
-    public MarcaDAO(Connection conn)
+    public AutoBaseDAO(Connection conn)
     {
-        super(conn, "marca");
+        super(conn, "vehiculo_base");
     }
 
     @Override
-    public List<MarcaDTO> getAll() throws SQLException
+    public List<AutoBaseDTO> getAll() throws SQLException
     {
-        List<MarcaDTO> marcaList = new ArrayList<MarcaDTO>();
+        List<AutoBaseDTO> baseList = new ArrayList<AutoBaseDTO>();
         PreparedStatement st = null;
         try
         {
+            
             st = this.conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
             st.executeQuery();
             try
             {
                 //Should be only one
                 ResultSet results = st.getResultSet();
-                while(results.next())
-                {
-                    MarcaDTO marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
-                    marcaList.add(marca);
+                while(results.next()) {
+                    ModelDTO model = new ModelDAO(conn).find(results.getInt(3));
+                    if(model != null) {
+                        AutoBaseDTO base = new AutoBaseDTO();
+                        base.setId(results.getInt(1));
+                        base.setDescripcion(results.getString(2));
+                        base.setModel(model);
+                        base.setColor(Colors.getById(results.getInt(4)));
+                        baseList.add(base);
+                    }
                 }
-                return marcaList;
+                return baseList;
             }
             catch(SQLException e)
             {
@@ -52,20 +61,20 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             System.err.println("Couldn't insert new user");
             throw e;
         }
-        
     }
 
     @Override
-    public MarcaDTO create(MarcaDTO model) throws SQLException
+    public AutoBaseDTO create(AutoBaseDTO model) throws SQLException
     {
-        MarcaDTO newModel = null;
+        AutoBaseDTO newModel = null;
         PreparedStatement st = null;
         try
         {
-            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_marca) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, model.getName());
+            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(descripcion, modelo, color) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, model.getDescripcion());
+            st.setInt(2, model.getModel().getId());
+            st.setInt(3, model.getColor().getId());
             st.executeUpdate();
-            
             try
             {
                 ResultSet results = st.getGeneratedKeys();
@@ -87,15 +96,15 @@ public class MarcaDAO extends DAO<MarcaDTO>{
     }
 
     @Override
-    public void update(MarcaDTO model) throws SQLException
+    public void update(AutoBaseDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public MarcaDTO find(Integer id) throws SQLException
+    public AutoBaseDTO find(Integer id) throws SQLException
     {
-        MarcaDTO marca = null;
+        AutoBaseDTO base = null;
         PreparedStatement st = null;
         try
         {
@@ -107,11 +116,16 @@ public class MarcaDAO extends DAO<MarcaDTO>{
                 //Should be only one
                 ResultSet results = st.getResultSet();
                 if(results.next()) {
-                    marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
+                    ModelDTO model = new ModelDAO(conn).find(results.getInt(3));
+                    if(model != null) {
+                        base = new AutoBaseDTO();
+                        base.setId(results.getInt(1));
+                        base.setDescripcion(results.getString(2));
+                        base.setModel(model);
+                        base.setColor(Colors.getById(results.getInt(4)));
+                    }
                 }
-                return marca;
+                return base;
             }
             catch(SQLException e)
             {

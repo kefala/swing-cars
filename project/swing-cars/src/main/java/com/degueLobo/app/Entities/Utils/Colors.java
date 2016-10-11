@@ -24,4 +24,15 @@ public enum Colors {
     public String getName() {
         return name;
     }
+    
+    public static Colors getById(int id){
+        switch (id){
+            case 1:
+                return Colors.RED;
+            case 2:
+                return Colors.BLACK;
+            default:
+                return null;
+        }
+    }
 }

@@ -7,6 +7,7 @@ import com.degueLobo.app.Entities.Utils.Colors;
  * Created by kefala on 23/9/16.
  */
 public class AutoBaseDTO extends DTO {
+    private String descripcion;
     private ModelDTO model;
     private Colors color;
 
@@ -27,5 +28,21 @@ public class AutoBaseDTO extends DTO {
 
     public void setColor(Colors color) {
         this.color = color;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion()
+    {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion)
+    {
+        this.descripcion = descripcion;
     }
 }

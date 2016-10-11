@@ -1,3 +1,6 @@
+/*Avis
+ Lobo/Degue*/
+
 package com.degueLobo.app.Entities.Autos;
 
 import com.degueLobo.app.Entities.DAO;
@@ -13,17 +16,17 @@ import java.util.List;
  *
  * @author mjdegue
  */
-public class MarcaDAO extends DAO<MarcaDTO>{
+public class ModelDAO extends DAO<ModelDTO>{
 
-    public MarcaDAO(Connection conn)
+    public ModelDAO(Connection conn)
     {
-        super(conn, "marca");
+        super(conn, "modelo");
     }
 
     @Override
-    public List<MarcaDTO> getAll() throws SQLException
+    public List<ModelDTO> getAll() throws SQLException
     {
-        List<MarcaDTO> marcaList = new ArrayList<MarcaDTO>();
+        List<ModelDTO> modelList = new ArrayList<ModelDTO>();
         PreparedStatement st = null;
         try
         {
@@ -33,14 +36,17 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             {
                 //Should be only one
                 ResultSet results = st.getResultSet();
-                while(results.next())
-                {
-                    MarcaDTO marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
-                    marcaList.add(marca);
+                while(results.next()) {
+                    MarcaDTO marca = new MarcaDAO(conn).find(results.getInt(3));
+                    if(marca != null) {
+                        ModelDTO model = new ModelDTO();
+                        model.setId(results.getInt(1));
+                        model.setName(results.getString(2));
+                        model.setMarca(marca);
+                        modelList.add(model);
+                    }
                 }
-                return marcaList;
+                return modelList;
             }
             catch(SQLException e)
             {
@@ -52,20 +58,19 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             System.err.println("Couldn't insert new user");
             throw e;
         }
-        
     }
 
     @Override
-    public MarcaDTO create(MarcaDTO model) throws SQLException
+    public ModelDTO create(ModelDTO model) throws SQLException
     {
-        MarcaDTO newModel = null;
+        ModelDTO newModel = null;
         PreparedStatement st = null;
         try
         {
-            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_marca) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_modelo, marca) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
             st.setString(1, model.getName());
+            st.setInt(2, model.getMarca().getId());
             st.executeUpdate();
-            
             try
             {
                 ResultSet results = st.getGeneratedKeys();
@@ -84,18 +89,19 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             throw e;
         }
         return newModel;
+
     }
 
     @Override
-    public void update(MarcaDTO model) throws SQLException
+    public void update(ModelDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public MarcaDTO find(Integer id) throws SQLException
+    public ModelDTO find(Integer id) throws SQLException
     {
-        MarcaDTO marca = null;
+        ModelDTO model = null;
         PreparedStatement st = null;
         try
         {
@@ -107,11 +113,15 @@ public class MarcaDAO extends DAO<MarcaDTO>{
                 //Should be only one
                 ResultSet results = st.getResultSet();
                 if(results.next()) {
-                    marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
+                    MarcaDTO marca = new MarcaDAO(conn).find(results.getInt(3));
+                    if(marca != null) {
+                        model = new ModelDTO();
+                        model.setId(results.getInt(1));
+                        model.setName(results.getString(2));
+                        model.setMarca(marca);
+                    }
                 }
-                return marca;
+                return model;
             }
             catch(SQLException e)
             {
@@ -124,4 +134,5 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             throw e;
         }
     }
+
 }

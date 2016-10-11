@@ -1,4 +1,7 @@
-package com.degueLobo.app.Entities.Autos;
+/*Avis
+ Lobo/Degue*/
+
+package com.degueLobo.app.Entities.Oficinas;
 
 import com.degueLobo.app.Entities.DAO;
 import java.sql.Connection;
@@ -13,17 +16,17 @@ import java.util.List;
  *
  * @author mjdegue
  */
-public class MarcaDAO extends DAO<MarcaDTO>{
+public class OficinaDAO extends DAO<OficinaDTO>{
 
-    public MarcaDAO(Connection conn)
+    public OficinaDAO(Connection conn)
     {
-        super(conn, "marca");
+        super(conn, "oficina");
     }
 
     @Override
-    public List<MarcaDTO> getAll() throws SQLException
+    public List<OficinaDTO> getAll() throws SQLException
     {
-        List<MarcaDTO> marcaList = new ArrayList<MarcaDTO>();
+        List<OficinaDTO> ofiList = new ArrayList<OficinaDTO>();
         PreparedStatement st = null;
         try
         {
@@ -33,14 +36,13 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             {
                 //Should be only one
                 ResultSet results = st.getResultSet();
-                while(results.next())
-                {
-                    MarcaDTO marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
-                    marcaList.add(marca);
+                while(results.next()) {
+                    OficinaDTO ofi = new OficinaDTO();
+                    ofi.setId(results.getInt(1));
+                    ofi.setNombre(results.getString(2));
+                    ofiList.add(ofi);
                 }
-                return marcaList;
+                return ofiList;
             }
             catch(SQLException e)
             {
@@ -52,20 +54,18 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             System.err.println("Couldn't insert new user");
             throw e;
         }
-        
     }
 
     @Override
-    public MarcaDTO create(MarcaDTO model) throws SQLException
+    public OficinaDTO create(OficinaDTO model) throws SQLException
     {
-        MarcaDTO newModel = null;
+        OficinaDTO newModel = null;
         PreparedStatement st = null;
         try
         {
-            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_marca) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, model.getName());
+            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_oficina) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, model.getNombre());
             st.executeUpdate();
-            
             try
             {
                 ResultSet results = st.getGeneratedKeys();
@@ -87,15 +87,15 @@ public class MarcaDAO extends DAO<MarcaDTO>{
     }
 
     @Override
-    public void update(MarcaDTO model) throws SQLException
+    public void update(OficinaDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public MarcaDTO find(Integer id) throws SQLException
+    public OficinaDTO find(Integer id) throws SQLException
     {
-        MarcaDTO marca = null;
+        OficinaDTO ofi = null;
         PreparedStatement st = null;
         try
         {
@@ -107,11 +107,11 @@ public class MarcaDAO extends DAO<MarcaDTO>{
                 //Should be only one
                 ResultSet results = st.getResultSet();
                 if(results.next()) {
-                    marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
+                    ofi = new OficinaDTO();
+                    ofi.setId(results.getInt(1));
+                    ofi.setNombre(results.getString(2));
                 }
-                return marca;
+                return ofi;
             }
             catch(SQLException e)
             {
@@ -124,4 +124,5 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             throw e;
         }
     }
+
 }

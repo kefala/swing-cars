@@ -1,6 +1,12 @@
+/*Avis
+ Lobo/Degue*/
+
 package com.degueLobo.app.Entities.Autos;
 
 import com.degueLobo.app.Entities.DAO;
+import com.degueLobo.app.Entities.Oficinas.OficinaDAO;
+import com.degueLobo.app.Entities.Oficinas.OficinaDTO;
+import com.degueLobo.app.Entities.Utils.Colors;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,17 +19,17 @@ import java.util.List;
  *
  * @author mjdegue
  */
-public class MarcaDAO extends DAO<MarcaDTO>{
+public class AutoDAO extends DAO<AutoDTO>{
 
-    public MarcaDAO(Connection conn)
+    public AutoDAO(Connection conn)
     {
-        super(conn, "marca");
+        super(conn, "vehiculo");
     }
 
     @Override
-    public List<MarcaDTO> getAll() throws SQLException
+    public List<AutoDTO> getAll() throws SQLException
     {
-        List<MarcaDTO> marcaList = new ArrayList<MarcaDTO>();
+        List<AutoDTO> autoList = new ArrayList<AutoDTO>();
         PreparedStatement st = null;
         try
         {
@@ -33,14 +39,20 @@ public class MarcaDAO extends DAO<MarcaDTO>{
             {
                 //Should be only one
                 ResultSet results = st.getResultSet();
-                while(results.next())
-                {
-                    MarcaDTO marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
-                    marcaList.add(marca);
+                while(results.next()) {
+                    AutoBaseDTO base = new AutoBaseDAO(conn).find(results.getInt(2));
+                    //oficina can be null
+                    OficinaDTO oficina = new OficinaDAO(conn).find(results.getInt(4));
+                    if(base != null) {
+                        AutoDTO auto = new AutoDTO();
+                        auto.setId(results.getInt(1));
+                        auto.setBase(base);
+                        auto.setPatente(results.getString(3));
+                        auto.setOficinaActual(oficina);
+                        autoList.add(auto);
+                    }
                 }
-                return marcaList;
+                return autoList;
             }
             catch(SQLException e)
             {
@@ -51,21 +63,21 @@ public class MarcaDAO extends DAO<MarcaDTO>{
         {
             System.err.println("Couldn't insert new user");
             throw e;
-        }
-        
+        }    
     }
 
     @Override
-    public MarcaDTO create(MarcaDTO model) throws SQLException
+    public AutoDTO create(AutoDTO model) throws SQLException
     {
-        MarcaDTO newModel = null;
+        AutoDTO newModel = null;
         PreparedStatement st = null;
         try
         {
-            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_marca) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, model.getName());
+            st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(base, patente, oficina_actual) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            st.setInt(1, model.getBase().getId());
+            st.setString(2, model.getPatente());
+            st.setInt(3, model.getOficinaActual().getId());
             st.executeUpdate();
-            
             try
             {
                 ResultSet results = st.getGeneratedKeys();
@@ -87,15 +99,15 @@ public class MarcaDAO extends DAO<MarcaDTO>{
     }
 
     @Override
-    public void update(MarcaDTO model) throws SQLException
+    public void update(AutoDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public MarcaDTO find(Integer id) throws SQLException
+    public AutoDTO find(Integer id) throws SQLException
     {
-        MarcaDTO marca = null;
+        AutoDTO auto = null;
         PreparedStatement st = null;
         try
         {
@@ -107,11 +119,18 @@ public class MarcaDAO extends DAO<MarcaDTO>{
                 //Should be only one
                 ResultSet results = st.getResultSet();
                 if(results.next()) {
-                    marca = new MarcaDTO();
-                    marca.setId(results.getInt(1));
-                    marca.setName(results.getString(2));
+                    AutoBaseDTO base = new AutoBaseDAO(conn).find(results.getInt(2));
+                    //oficina can be null
+                    OficinaDTO oficina = new OficinaDAO(conn).find(results.getInt(4));
+                    if(base != null) {
+                        auto = new AutoDTO();
+                        auto.setId(results.getInt(1));
+                        auto.setBase(base);
+                        auto.setPatente(results.getString(3));
+                        auto.setOficinaActual(oficina);
+                    }
                 }
-                return marca;
+                return auto;
             }
             catch(SQLException e)
             {
@@ -122,6 +141,7 @@ public class MarcaDAO extends DAO<MarcaDTO>{
         {
             System.err.println("Couldn't insert new user");
             throw e;
-        }
+        }    
     }
+
 }

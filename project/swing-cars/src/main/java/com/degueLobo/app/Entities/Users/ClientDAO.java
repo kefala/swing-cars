@@ -76,7 +76,37 @@ public class ClientDAO extends DAO<ClientDTO>{
     @Override
     public ClientDTO find(Integer id) throws SQLException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ClientDTO client = null;
+        PreparedStatement st = null;
+        try
+        {
+            st = this.conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = (?)");
+            st.setInt(1, id);
+            st.executeQuery();
+            try
+            {
+                //Should be only one
+                ResultSet results = st.getResultSet();
+                if(results.next()) {
+                    client = new ClientDTO();
+                    client.setId(results.getInt(1));
+                    client.setName(results.getString(3));
+                    client.setDni(results.getString(4));
+                    client.setDireccion(results.getString(5));
+                    client.setTelefono(results.getString(6));
+                }
+                return client;
+            }
+            catch(SQLException e)
+            {
+                System.err.println("Couldn't retrieve user's id");
+                throw e;
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Couldn't insert new user");
+            throw e;
+        }
     }
 
 }

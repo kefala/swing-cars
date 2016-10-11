@@ -6,9 +6,11 @@ Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
 import com.degueLobo.app.Templates.ContentView.InsertClienteContentView;
+import com.degueLobo.app.Templates.ContentView.InsertUsuarioContentView;
 import com.degueLobo.app.Templates.SideBar.AdminSideBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,12 +23,13 @@ import javax.swing.JOptionPane;
  */
 public class AdminView extends View {
     //Save the action listeners so when any new screen is pushed we can send the ActionListeners
-    private ActionListener commitUserListener;
     private ActionListener commitClienteListener;
+    private ActionListener commitUsuarioListener;
     private AdminSideBar adminSidebar;
 
     //Posible content screens:
     private InsertClienteContentView insertClientContentView;
+    private InsertUsuarioContentView insertUsuarioContentView;
     
     public AdminView(Model m)
     {
@@ -34,6 +37,7 @@ public class AdminView extends View {
         adminSidebar = new AdminSideBar();
         ApplicationManager.getMainAppContainer().setSideBar(adminSidebar);
         adminSidebar.addNewClientButtonListener(new NewClientActionListener());
+        adminSidebar.addNewUserButtonListener(new NewUsuarioActionListener());
     }
     
     public void addLogOutListener(ActionListener al) {
@@ -52,37 +56,75 @@ public class AdminView extends View {
         this.commitClienteListener = al;
     }
     
-    //this is for every type of role
-    public void addCommitUserListener(ActionListener al) {
-        this.commitUserListener = al;
+    public void addCommitUsuarioListener(ActionListener al) {
+        this.commitUsuarioListener = al;
     }
-
+    
     public String getNombreUsuario() {
-        return insertClientContentView.getNombreUsuario();
+        if(insertClientContentView != null) {
+            return insertClientContentView.getNombreUsuario();
+        } 
+        else if(insertUsuarioContentView != null) {
+            return insertUsuarioContentView.getNombreUsuario();
+        }
+        return "";
     }
     
     public String getNombre() {
-        return insertClientContentView.getNombre();
+        
+        if(insertClientContentView != null) {
+            return insertClientContentView.getNombre();
+        } 
+        return "";
     }
     
     public String getDni() {
-        return insertClientContentView.getDni();
+        
+        if(insertClientContentView != null) {
+            return insertClientContentView.getDni();
+        } 
+        return "";
     }
     
     public String getDireccion() {
-        return insertClientContentView.getDireccion();
+        if(insertClientContentView != null) {
+            return insertClientContentView.getDireccion();
+        }
+        return "";
     }
     
     public String getTelefono() {
-        return insertClientContentView.getTelefono();
+        if(insertClientContentView != null) {
+            return insertClientContentView.getTelefono();
+        }
+        return "";
     }
     
     public String getPassword() {
-        return insertClientContentView.getPassword();
+        if(insertClientContentView != null) {
+            return insertClientContentView.getPassword();
+        }
+        else if(insertUsuarioContentView != null) {
+            return insertUsuarioContentView.getPassword();
+        }
+        return "";
+    }
+    
+    public Roles getRol() {
+        if(insertUsuarioContentView != null) {
+            return insertUsuarioContentView.getRole();
+        }
+        return null;
+    }
+    
+    private void clearScreenData() {
+        insertClientContentView = null;
+        insertUsuarioContentView = null;
     }
     
     private class NewClientActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            clearScreenData();
             insertClientContentView = new InsertClienteContentView();
             ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(insertClientContentView);
@@ -97,7 +139,36 @@ public class AdminView extends View {
         public void actionPerformed(ActionEvent e) {
             List<String> errorList = insertClientContentView.getErrors();
             if(errorList.isEmpty()) {
-                commitClienteListener.actionPerformed(e);
+                if(commitUsuarioListener != null) {
+                    commitClienteListener.actionPerformed(e);
+                }
+            } else {
+                //ApplicationManager -> crear metodo mostrar lista error
+                JOptionPane.showConfirmDialog(null, "Errores");
+            }
+        }
+    }
+    
+    private class NewUsuarioActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            clearScreenData();
+            insertUsuarioContentView = new InsertUsuarioContentView();
+            ApplicationManager.getMainAppContainer().resetContentPanelStatus();
+            ApplicationManager.getMainAppContainer().pushContentPanel(insertUsuarioContentView);
+            
+            //aca depende del estado como se hace
+            insertUsuarioContentView.addConfirmActionListener(new ConfirmUsuarioActionListener());
+        }
+    }
+    
+    //To check if all the data inserted is correct
+    private class ConfirmUsuarioActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            List<String> errorList = insertUsuarioContentView.getErrors();
+            if(errorList.isEmpty()) {
+                if(commitUsuarioListener != null) {
+                    commitUsuarioListener.actionPerformed(e);
+                }
             } else {
                 //ApplicationManager -> crear metodo mostrar lista error
                 JOptionPane.showConfirmDialog(null, "Errores");
