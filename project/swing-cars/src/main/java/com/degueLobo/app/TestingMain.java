@@ -3,8 +3,11 @@
 
 package com.degueLobo.app;
 
+import com.degueLobo.app.Entities.Autos.AutoDTO;
 import com.degueLobo.app.Entities.Oficinas.OficinaDAO;
 import com.degueLobo.app.Entities.Oficinas.OficinaDTO;
+import com.degueLobo.app.Entities.Reservas.ItemReservaDAO;
+import com.degueLobo.app.Entities.Reservas.ItemReservaDTO;
 import com.degueLobo.app.Entities.Reservas.ReservaDAO;
 import com.degueLobo.app.Entities.Reservas.ReservaDTO;
 import com.degueLobo.app.Entities.Users.ClientDAO;
@@ -27,11 +30,12 @@ public class TestingMain {
         
         try
         {
-            ReservaDAO d = new ReservaDAO(ConnectionManager.GetConnection());
-            ReservaDTO r = d.find(2);
-            
-            System.out.println("Reserva: " + r.getDescripcion());
-
+            ReservaDTO r = new ReservaDAO(ConnectionManager.GetConnection()).find(2);
+            List<ItemReservaDTO> items = r.getItemsReserva();
+            for(ItemReservaDTO i: items)
+            {
+                System.out.println("item: " + i.getAuto().getPatente());
+            }
         } catch (SQLException e)
         {
             JOptionPane.showConfirmDialog(null, e.toString());
