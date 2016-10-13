@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 public class TestingMain {
     public static void main( String[] args ) throws ParseException
     {
-        
         try
         {
             ReservaDTO r = new ReservaDAO(ConnectionManager.GetConnection()).find(2);
