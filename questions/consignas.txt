@@ -22,3 +22,4 @@ Alquiler de automovies
 7- Tipos de usuarios: clientes, vendedores y admnistradores
 
 
+mvn archetype:generate -DgroupId=com.lobo-degue.app -DartifactId=swing-cars -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
