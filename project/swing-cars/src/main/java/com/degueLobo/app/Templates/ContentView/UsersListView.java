@@ -17,12 +17,14 @@ public class UsersListView extends CustomContentView  {
     public UsersListView() {
         JPanel innerPanel = new JPanel();
 
-        title = new JLabel("Usuarios:");
+        title = new JLabel("Usuarios");
 
         innerPanel.setPreferredSize(new Dimension(300, 200));
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
 
+        title.setBorder(new EmptyBorder(30,20,40,20));
         innerPanel.add(title);
+
 
         UsuariosModel userModel = new UsuariosModel();
 
@@ -30,6 +32,7 @@ public class UsersListView extends CustomContentView  {
 
         for (UserDTO user: userList) {
             fileUser = new JLabel(user.getUsername() + " - " + user.getRol().getName());
+            fileUser.setBorder(new EmptyBorder(10,30,10,30));
             innerPanel.add(fileUser);
         }
 
