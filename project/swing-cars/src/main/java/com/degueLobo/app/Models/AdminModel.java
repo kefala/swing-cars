@@ -10,6 +10,8 @@ import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ConnectionManager;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,5 +48,19 @@ public class AdminModel extends Model {
             JOptionPane.showConfirmDialog(null, "Error al cargar usuario\n" + e.toString());
         }
         return newUser;
+    }
+
+    public List<UserDTO> getAdminAndVendedor() {
+        List<UserDTO> usersList = Collections.emptyList();
+
+        try {
+            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
+            usersList = userDAO.getAdminAndVendedor();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
     }
 }

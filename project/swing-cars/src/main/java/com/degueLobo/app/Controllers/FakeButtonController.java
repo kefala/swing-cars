@@ -4,7 +4,6 @@
 package com.degueLobo.app.Controllers;
 
 import com.degueLobo.app.Managers.ApplicationManager;
-import com.degueLobo.app.Models.FakeButtonModel;
 import com.degueLobo.app.Views.FakeButtonView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

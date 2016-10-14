@@ -4,8 +4,6 @@ import com.degueLobo.app.Entities.RowInfo;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Users.UserRowInfo;
 import com.degueLobo.app.Entities.Utils.Roles;
-import com.degueLobo.app.Models.UsuariosModel;
-import com.degueLobo.app.Templates.CustomWidgets.ButtonColumn;
 import com.degueLobo.app.Templates.CustomWidgets.CustomTable;
 import com.degueLobo.app.Templates.CustomWidgets.CustomTableButtonInfo;
 
@@ -13,12 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * Created by kefala on 13/10/16.
