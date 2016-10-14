@@ -20,6 +20,11 @@ public class UserDTO extends DTO {
         this.rol = rol;
     }
 
+    public UserDTO(String user, Roles rol) {
+        this.username = user;
+        this.rol = rol;
+    }
+
     /**
      * @return the username
      */

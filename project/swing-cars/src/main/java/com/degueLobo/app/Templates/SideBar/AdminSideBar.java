@@ -14,18 +14,20 @@ import javax.swing.JPanel;
  * @author mjdegue
  */
 public class AdminSideBar extends CustomSideBar {
-    private JButton newUser;
-    private JButton newClient;
+    private JButton newUser, newClient, userBtn;
     private JButton logOut;
+
     public AdminSideBar() {
         newUser = new JButton("Create User");
         newClient = new JButton("Create Client");
+        userBtn = new JButton("Usuarios");
         logOut = new JButton("Log Out");
         
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
         innerPanel.add(newUser);
         innerPanel.add(newClient);
+        innerPanel.add(userBtn);
         innerPanel.add(logOut);
         innerPanel.setBackground(Color.GRAY);
         controlPanel.add(innerPanel);
@@ -42,5 +44,9 @@ public class AdminSideBar extends CustomSideBar {
     
     public void addLogOutButtonListener(ActionListener al) {
         logOut.addActionListener(al);
+    }
+
+    public void addUsersViewButtonListener(ActionListener al) {
+        userBtn.addActionListener(al);
     }
 }

@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,6 +25,39 @@ public class UserDAO extends DAO<UserDTO> {
     public List<UserDTO> getAll() throws SQLException {
         return null;
     }
+
+    public List<UserDTO> getAdminAndVendedor() throws SQLException {
+        PreparedStatement st = null;
+        List<UserDTO> usersList = new ArrayList<UserDTO>();
+        UserDTO userDTO;
+        try
+        {
+            st = this.conn.prepareStatement("SELECT * FROM usuario WHERE usuario.tipo_usuario = 1 OR usuario.tipo_usuario = 2 LIMIT 200;");
+            ResultSet results = st.executeQuery();
+            results.next();
+
+            while(results.next()){
+                userDTO = new UserDTO();
+                //Retrieve by column name
+                int tipo  = results.getInt("tipo_usuario");
+                String nombre = results.getString("nombre_usuario");
+
+                //Display values
+                System.out.print("ID: " + tipo);
+                System.out.print(", nombre: " + nombre);
+                System.out.println("");
+                usersList.add(new UserDTO(nombre, Roles.getRolById(tipo)));
+            }
+
+        } catch (SQLException e)
+        {
+            System.err.println("Couldn't lists da users");
+            throw e;
+        }
+
+        return usersList;
+    }
+
 
     @Override
     public UserDTO create(UserDTO model) throws SQLException

@@ -33,7 +33,7 @@ public class MainContainer extends JFrame {
     
     public void initialize() {
         setLayout(new BorderLayout());
-        setTitle("Login View");
+        setTitle("AVIS");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initializeComponents();
     }

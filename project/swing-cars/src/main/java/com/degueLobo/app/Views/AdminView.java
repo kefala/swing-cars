@@ -11,6 +11,7 @@ import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
 import com.degueLobo.app.Templates.ContentView.InsertClienteContentView;
 import com.degueLobo.app.Templates.ContentView.InsertUsuarioContentView;
+import com.degueLobo.app.Templates.ContentView.UsersListView;
 import com.degueLobo.app.Templates.SideBar.AdminSideBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,7 @@ public class AdminView extends View {
         ApplicationManager.getMainAppContainer().setSideBar(adminSidebar);
         adminSidebar.addNewClientButtonListener(new NewClientActionListener());
         adminSidebar.addNewUserButtonListener(new NewUsuarioActionListener());
+        adminSidebar.addUsersViewButtonListener(new GoToListUserView());
     }
     
     public void addLogOutListener(ActionListener al) {
@@ -173,6 +175,17 @@ public class AdminView extends View {
                 //ApplicationManager -> crear metodo mostrar lista error
                 JOptionPane.showConfirmDialog(null, "Errores");
             }
+        }
+    }
+
+    private class GoToListUserView implements ActionListener {
+        private UsersListView userListView;
+
+        public void actionPerformed(ActionEvent e) {
+            clearScreenData();
+            userListView = new UsersListView();
+            ApplicationManager.getMainAppContainer().resetContentPanelStatus();
+            ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
         }
     }
 }

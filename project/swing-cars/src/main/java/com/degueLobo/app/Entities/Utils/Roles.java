@@ -7,7 +7,7 @@ public enum Roles {
     //clase estaticamente parametrizada :P
 
     ADMINISTRADOR(1, "Administrador"),
-    EMPLEADO(2, "Empleado"),
+    EMPLEADO(2, "Vendedor"),
     CLIENTE(3, "Cliente");
 
     private final Integer id;
