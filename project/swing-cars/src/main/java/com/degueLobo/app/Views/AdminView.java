@@ -1,7 +1,4 @@
 /*Avis
-Expression licensePrefix is undefined on line 4, column 3 in Templates/Licenses/license-default.txt.To change this license header, choose License Headers in Project Properties.
-Expression licensePrefix is undefined on line 5, column 3 in Templates/Licenses/license-default.txt.To change this template file, choose Tools | Templates
-Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/license-default.txt.and open the template in the editor.
  Lobo/Degue*/
 
 package com.degueLobo.app.Views;
@@ -31,7 +28,8 @@ public class AdminView extends View {
     //Posible content screens:
     private InsertClienteContentView insertClientContentView;
     private InsertUsuarioContentView insertUsuarioContentView;
-    
+    private UsersListView userListView;
+
     public AdminView(Model m)
     {
         super(m);
@@ -120,15 +118,16 @@ public class AdminView extends View {
     }
     
     private void clearScreenData() {
+        ApplicationManager.getMainAppContainer().resetContentPanelStatus();
         insertClientContentView = null;
         insertUsuarioContentView = null;
+        userListView = null;
     }
     
     private class NewClientActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             insertClientContentView = new InsertClienteContentView();
-            ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(insertClientContentView);
             
             //aca depende del estado como se hace
@@ -179,8 +178,6 @@ public class AdminView extends View {
     }
 
     private class GoToListUserView implements ActionListener {
-        private UsersListView userListView;
-
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             userListView = new UsersListView();
