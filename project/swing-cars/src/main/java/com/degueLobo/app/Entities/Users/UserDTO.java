@@ -25,6 +25,10 @@ public class UserDTO extends DTO {
         this.rol = rol;
     }
 
+    public UserDTO(String user) {
+        this.username = user;
+    }
+
     /**
      * @return the username
      */
