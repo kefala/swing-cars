@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
  * Created by kefala on 13/10/16.
  */
 public class UsersListView extends CustomContentView  {
-    private JLabel fileUser, title;
+    private JLabel rowUser, title; 
     public UsersListView() {
         JPanel innerPanel = new JPanel();
 
@@ -31,9 +31,9 @@ public class UsersListView extends CustomContentView  {
         List<UserDTO> userList =  userModel.getAdminAndVendedor();
 
         for (UserDTO user: userList) {
-            fileUser = new JLabel(user.getUsername() + " - " + user.getRol().getName());
-            fileUser.setBorder(new EmptyBorder(10,30,10,30));
-            innerPanel.add(fileUser);
+            rowUser = new JLabel(user.getUsername() + " - " + user.getRol().getName());
+            rowUser.setBorder(new EmptyBorder(10,30,10,30));
+            innerPanel.add(rowUser);
         }
 
         controlPanel.setLayout(new BorderLayout());
