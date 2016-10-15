@@ -86,27 +86,23 @@ public class UserDAO extends DAO<UserDTO> {
     {
         UserDTO newModel = null;
         PreparedStatement st = null;
-        try
-        {
+        try {
             st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_usuario, password, tipo_usuario) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             st.setString(1, model.getUsername());
             st.setString(2, model.getPassword());
             st.setInt(3, model.getRol().getId());
             st.executeUpdate();
-            try
-            {
+            try {
                 ResultSet results = st.getGeneratedKeys();
                 results.next();
                 model.setId(results.getInt(1));
                 newModel = model;
             }
-            catch(SQLException e)
-            {
+            catch(SQLException e) {
                 System.err.println("Couldn't retrieve user's id");
                 throw e;
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println("Couldn't insert new user");
             throw e;
         }
@@ -181,4 +177,5 @@ public class UserDAO extends DAO<UserDTO> {
         }
         return user;
     }
+    
 }

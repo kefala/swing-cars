@@ -6,10 +6,13 @@ Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/
 
 package com.degueLobo.app.Models;
 
+import com.degueLobo.app.Entities.Users.ClientDAO;
+import com.degueLobo.app.Entities.Users.ClientDTO;
 import com.degueLobo.app.Entities.Users.UserDAO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Managers.ConnectionManager;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
@@ -19,17 +22,16 @@ import java.util.List;
  * @author mjdegue
  */
 public class EmpleadoModel extends Model {
-    public List<UserDTO> getAdminAndVendedor() {
-        List<UserDTO> usersList = Collections.emptyList();
 
+    public ClientDTO ingresarCliente(String userName, String password, String nombre, String dni, String direccion, String telefono) {
+        ClientDTO cliente = new ClientDTO(userName, password, nombre, dni, direccion, telefono);
+        ClientDTO newClient = null;
         try {
-            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
-            usersList = userDAO.getAdminAndVendedor();
-
+            ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
+            newClient = dao.create(cliente);
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showConfirmDialog(null, "Error al cargar usuario\n" + e.toString());
         }
-
-        return usersList;
+        return newClient;
     }
 }

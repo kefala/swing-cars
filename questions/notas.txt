@@ -1,0 +1,5 @@
+Admin model
+	- crea admis y empleados
+	- crea clientes
+	- listar clientes
+	- listar usuarios
