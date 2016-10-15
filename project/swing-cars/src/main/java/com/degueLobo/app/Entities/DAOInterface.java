@@ -10,7 +10,7 @@ public interface DAOInterface<MODEL_DTO> {
 
     MODEL_DTO create(MODEL_DTO dto) throws SQLException;
 
-    void delete(Integer id) throws SQLException;
+    boolean delete(Integer id) throws SQLException;
 
     List<MODEL_DTO> getAll() throws SQLException;
 

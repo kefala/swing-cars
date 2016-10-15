@@ -35,6 +35,9 @@ public class AdminView extends View {
     //Model events
     private ActionListener onShowListener;
     
+    //Edit/Delete actions
+    private ActionListener onEditEntityListener;
+    
     public AdminView(Model m)
     {
         super(m);
@@ -51,6 +54,10 @@ public class AdminView extends View {
     
     public void addOnShowListener(ActionListener al) {
         onShowListener = al;
+    }
+    
+    public void addOnEditEntityListener(ActionListener al) {
+        this.onEditEntityListener = al;
     }
     
     @Override
@@ -201,6 +208,7 @@ public class AdminView extends View {
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             userListView = new UsersListView();
+            userListView.addEditActionListener(new EditFromList());
             userListView.initialize();
             ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
@@ -208,8 +216,34 @@ public class AdminView extends View {
         }
     }
     
+    private class EditFromList implements ActionListener {
+
+        public void actionPerformed(ActionEvent e)
+        {
+            switch(e.getID())
+            {
+                case AdminViewEvents.EDIT_USER_FROM_LIST:
+                    editUserFromList(e);
+                    break;
+            }
+            
+        }
+    }
+    
+    private void editUserFromList(ActionEvent e)
+    {
+        UserDTO user = (UserDTO) e.getSource();
+        //TODO: Solve this
+        int reply = JOptionPane.showConfirmDialog(ApplicationManager.getMainAppContainer(), "Desea borrar a " + user.getUsername(), "Confirm", JOptionPane.YES_NO_OPTION);
+        if(reply == JOptionPane.YES_OPTION)
+        {
+            onEditEntityListener.actionPerformed(e);
+            onShow();
+        }
+    }
     public abstract class AdminViewEvents 
     {
-        static final int SHOW_USER_LIST = 1;
+        public static final int SHOW_USER_LIST = 1;
+        public static final int EDIT_USER_FROM_LIST = 1;
     }
 }

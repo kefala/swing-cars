@@ -5,6 +5,7 @@ import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Users.UserRowInfo;
 import com.degueLobo.app.Templates.CustomWidgets.CustomTable;
 import com.degueLobo.app.Templates.CustomWidgets.CustomTableButtonInfo;
+import com.degueLobo.app.Views.AdminView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -95,8 +96,7 @@ public class UsersListView extends CustomContentView  {
         {
             JTable table = (JTable)e.getSource();
             Integer index = Integer.valueOf(e.getActionCommand());
-            String str = ((Object)table.getValueAt(index, 3)).toString();
-            JOptionPane.showConfirmDialog(null, "edit: " + str);
+            editAction.actionPerformed(new ActionEvent(userList.get(index), AdminView.AdminViewEvents.EDIT_USER_FROM_LIST, null));
         }
     }
 }

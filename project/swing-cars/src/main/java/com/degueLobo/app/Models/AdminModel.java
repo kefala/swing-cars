@@ -68,4 +68,17 @@ public class AdminModel extends Model {
         }
         return usersList;
     }
+    
+    public boolean deleteUser(UserDTO user) {
+        boolean ans = false;
+        try
+        {
+            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
+            dao.delete(user.getId());
+        } catch (SQLException e)
+        {
+        }
+        
+        return ans;
+    }
 }
