@@ -11,6 +11,7 @@ import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ConnectionManager;
 import com.degueLobo.app.Managers.ErrorManager;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,19 @@ import javax.swing.JOptionPane;
  * @author mjdegue
  */
 public class AdminModel extends Model {
+
+
+    public List<UserDTO> getAllUsers()
+    {
+        List<UserDTO> userList = null;
+        try
+        {
+            userList = new UserDAO(ConnectionManager.GetConnection()).getAll();
+        } catch (SQLException e)
+        {
+        }
+        return userList;
+    }
     
     public ClientDTO ingresarCliente(String userName, String password, String nombre, String dni, String direccion, String telefono) { 
         ClientDTO cliente = new ClientDTO(userName, password, nombre, dni, direccion, telefono);
@@ -49,18 +63,18 @@ public class AdminModel extends Model {
         }
         return newUser;
     }
-    
-    public List<UserDTO> getAllUsers()
-    {
-        List<UserDTO> users = null;
-        try
-        {
-            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
-            users = dao.getAll();
-        } catch (SQLException e)
-        {
-            ErrorManager.PopupException(e);
+
+    public List<UserDTO> getAdminAndVendedor() {
+        List<UserDTO> usersList = Collections.emptyList();
+
+        try {
+            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
+            usersList = userDAO.getAdminAndVendedor();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return users;
+
+        return usersList;
     }
 }
