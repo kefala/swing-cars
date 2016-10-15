@@ -12,6 +12,8 @@ import com.degueLobo.app.Entities.Reservas.ReservaDAO;
 import com.degueLobo.app.Entities.Reservas.ReservaDTO;
 import com.degueLobo.app.Entities.Users.ClientDAO;
 import com.degueLobo.app.Entities.Users.ClientDTO;
+import com.degueLobo.app.Entities.Users.UserDAO;
+import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Utils.Estados;
 import com.degueLobo.app.Managers.ConnectionManager;
 import java.sql.SQLException;
@@ -29,11 +31,10 @@ public class TestingMain {
     {
         try
         {
-            ReservaDTO r = new ReservaDAO(ConnectionManager.GetConnection()).find(2);
-            List<ItemReservaDTO> items = r.getItemsReserva();
-            for(ItemReservaDTO i: items)
+            List<UserDTO> userList = new UserDAO(ConnectionManager.GetConnection()).getAll();
+            for(UserDTO i: userList)
             {
-                System.out.println("item: " + i.getAuto().getPatente());
+                System.out.println("item: " + i.getUsername());
             }
         } catch (SQLException e)
         {

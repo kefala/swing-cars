@@ -23,7 +23,37 @@ public class UserDAO extends DAO<UserDTO> {
     }
 
     public List<UserDTO> getAll() throws SQLException {
-        return null;
+        List<UserDTO> userList = new ArrayList<UserDTO>();
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM usuario");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) //Should only retrieve one as nombre_usuario is unique
+            {
+                UserDTO user = new UserDTO();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setRol(Roles.getRolById(rs.getInt(4)));
+                userList.add(user);
+            }
+        }
+        catch(SQLException e)
+        {
+            ErrorManager.PopupException(e);
+        }
+        finally
+        {
+            if(conn != null)
+            {
+                try
+                {
+                    conn.close();
+                } catch (SQLException e)
+                {
+                    ErrorManager.PopupException(e);
+                }
+            }
+        }
+        return userList;
     }
 
     public List<UserDTO> getAdminAndVendedor() throws SQLException {

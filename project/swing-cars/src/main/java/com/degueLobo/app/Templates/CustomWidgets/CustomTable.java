@@ -4,7 +4,6 @@
 package com.degueLobo.app.Templates.CustomWidgets;
 
 import com.degueLobo.app.Entities.RowInfo;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

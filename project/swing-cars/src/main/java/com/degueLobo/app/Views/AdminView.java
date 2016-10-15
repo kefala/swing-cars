@@ -3,6 +3,8 @@
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Entities.Users.UserDTO;
+import com.degueLobo.app.Entities.Users.UserRowInfo;
 import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
@@ -29,7 +31,10 @@ public class AdminView extends View {
     private InsertClienteContentView insertClientContentView;
     private InsertUsuarioContentView insertUsuarioContentView;
     private UsersListView userListView;
-
+    
+    //Model events
+    private ActionListener onShowListener;
+    
     public AdminView(Model m)
     {
         super(m);
@@ -44,12 +49,18 @@ public class AdminView extends View {
         adminSidebar.addLogOutButtonListener(al);
     }
     
+    public void addOnShowListener(ActionListener al) {
+        onShowListener = al;
+    }
+    
     @Override
     public void onShow() {
+        onShowListener.actionPerformed(new ActionEvent(this, AdminViewEvents.SHOW_USER_LIST, "onShow"));
     }
 
     @Override
     public void onHide() {
+        
     }
     
     public void addCommitClienteListener(ActionListener al) {
@@ -115,6 +126,15 @@ public class AdminView extends View {
             return insertUsuarioContentView.getRole();
         }
         return null;
+    }
+    
+    public void pushUserListInfo(List<UserDTO> userList)
+    {
+        if(userListView != null)
+        {
+            String[] columns = (userList != null && userList.size() > 0) ? new UserRowInfo(userList.get(0)).getColumnNames() : null;
+            userListView.dataPushed(columns, userList);
+        }
     }
     
     private void clearScreenData() {
@@ -183,6 +203,13 @@ public class AdminView extends View {
             userListView = new UsersListView();
             ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
+            onShow();
         }
+        
+    }
+    
+    public abstract class AdminViewEvents 
+    {
+        static final int SHOW_USER_LIST = 1;
     }
 }
