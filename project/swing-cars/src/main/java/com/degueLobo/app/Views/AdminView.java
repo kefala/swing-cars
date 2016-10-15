@@ -201,11 +201,11 @@ public class AdminView extends View {
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             userListView = new UsersListView();
+            userListView.initialize();
             ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
             onShow();
         }
-        
     }
     
     public abstract class AdminViewEvents 

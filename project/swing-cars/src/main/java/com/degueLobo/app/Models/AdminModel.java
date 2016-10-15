@@ -68,17 +68,4 @@ public class AdminModel extends Model {
         }
         return usersList;
     }
-
-    public List<UserDTO> getAllUsers() {
-        List<UserDTO> usersList = Collections.emptyList();
-        try {
-            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
-            usersList = userDAO.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return usersList;
-    }
-
-
 }
