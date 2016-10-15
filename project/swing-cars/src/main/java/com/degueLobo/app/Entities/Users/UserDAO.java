@@ -22,61 +22,28 @@ public class UserDAO extends DAO<UserDTO> {
         super(conn, "usuario");
     }
 
-    public List<UserDTO> getAll() throws SQLException {
-        return null;
-    }
-
-    public List<UserDTO> getAdminAndVendedor() throws SQLException {
-        PreparedStatement st = null;
-        List<UserDTO> usersList = new ArrayList<UserDTO>();
-        try
-        {
-            st = this.conn.prepareStatement("SELECT * FROM usuario WHERE usuario.tipo_usuario = 1 OR usuario.tipo_usuario = 2 LIMIT 200;");
-            ResultSet results = st.executeQuery();
-            results.next();
-
-            while(results.next()){
-                int tipo  = results.getInt("tipo_usuario");
-                String nombre = results.getString("nombre_usuario");
-                usersList.add(new UserDTO(nombre, Roles.getRolById(tipo)));
-            }
-
-        } catch (SQLException e)
-        {
-            System.err.println("Couldn't lists da users");
-            throw e;
-        }
-
-        return usersList;
-    }
-
-
     @Override
     public UserDTO create(UserDTO model) throws SQLException
     {
         UserDTO newModel = null;
         PreparedStatement st = null;
-        try
-        {
+        try {
             st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_usuario, password, tipo_usuario) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             st.setString(1, model.getUsername());
             st.setString(2, model.getPassword());
             st.setInt(3, model.getRol().getId());
             st.executeUpdate();
-            try
-            {
+            try {
                 ResultSet results = st.getGeneratedKeys();
                 results.next();
                 model.setId(results.getInt(1));
                 newModel = model;
             }
-            catch(SQLException e)
-            {
+            catch(SQLException e) {
                 System.err.println("Couldn't retrieve user's id");
                 throw e;
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println("Couldn't insert new user");
             throw e;
         }
@@ -151,4 +118,44 @@ public class UserDAO extends DAO<UserDTO> {
         }
         return user;
     }
+
+    public List<UserDTO> getAdminAndVendedor() throws SQLException {
+        PreparedStatement st = null;
+        List<UserDTO> usersList = new ArrayList<UserDTO>();
+        try {
+            st = this.conn.prepareStatement("SELECT * FROM usuario WHERE usuario.tipo_usuario = 1 OR usuario.tipo_usuario = 2 LIMIT 200;");
+            ResultSet results = st.executeQuery();
+            results.next();
+            while(results.next()){
+                int tipo  = results.getInt("tipo_usuario");
+                String nombre = results.getString("nombre_usuario");
+                usersList.add(new UserDTO(nombre, Roles.getRolById(tipo)));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Couldn't lists da users");
+            throw e;
+        }
+        return usersList;
+    }
+
+    public List<UserDTO> getAll() throws SQLException {
+        PreparedStatement st = null;
+        List<UserDTO> usersList = new ArrayList<UserDTO>();
+        try {
+            st = this.conn.prepareStatement("SELECT * FROM usuario LIMIT 200;");
+            ResultSet results = st.executeQuery();
+            results.next();
+            while(results.next()){
+                int tipo  = results.getInt("tipo_usuario");
+                String nombre = results.getString("nombre_usuario");
+                usersList.add(new UserDTO(nombre, Roles.getRolById(tipo)));
+            }
+        } catch (SQLException e) {
+            System.err.println("Couldn't lists da users");
+            throw e;
+        }
+        return usersList;
+    }
+
 }
