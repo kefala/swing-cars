@@ -42,7 +42,7 @@ public abstract class DAO<MODEL_DTO extends DTO> implements DAOInterface<MODEL_D
     
     public abstract MODEL_DTO create(MODEL_DTO model) throws SQLException;
 
-    public abstract void update(MODEL_DTO model) throws SQLException;
+    public abstract MODEL_DTO update(MODEL_DTO model) throws SQLException;
 
     public abstract MODEL_DTO find(Integer id) throws SQLException;
 

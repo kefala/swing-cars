@@ -96,7 +96,7 @@ public class AutoBaseDAO extends DAO<AutoBaseDTO>{
     }
 
     @Override
-    public void update(AutoBaseDTO model) throws SQLException
+    public AutoBaseDTO update(AutoBaseDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

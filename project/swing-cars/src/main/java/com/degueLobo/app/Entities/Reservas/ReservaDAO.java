@@ -117,7 +117,7 @@ public class ReservaDAO extends DAO<ReservaDTO>{
     }
 
     @Override
-    public void update(ReservaDTO model) throws SQLException
+    public ReservaDTO update(ReservaDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

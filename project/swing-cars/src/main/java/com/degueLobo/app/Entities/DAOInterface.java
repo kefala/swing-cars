@@ -1,5 +1,7 @@
 package com.degueLobo.app.Entities;
 
+import com.degueLobo.app.Entities.Users.UserDTO;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public interface DAOInterface<MODEL_DTO> {
 
     MODEL_DTO find(Integer id) throws SQLException;
 
-    void update(MODEL_DTO dto) throws SQLException;
+    MODEL_DTO update(MODEL_DTO dto) throws SQLException;
     
     String getTableName();
 

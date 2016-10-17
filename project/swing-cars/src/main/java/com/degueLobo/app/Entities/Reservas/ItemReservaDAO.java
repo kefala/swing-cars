@@ -6,6 +6,7 @@ package com.degueLobo.app.Entities.Reservas;
 import com.degueLobo.app.Entities.Autos.AutoDAO;
 import com.degueLobo.app.Entities.Autos.AutoDTO;
 import com.degueLobo.app.Entities.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,7 +64,7 @@ public class ItemReservaDAO extends DAO<ItemReservaDTO>{
     }
 
     @Override
-    public void update(ItemReservaDTO model) throws SQLException
+    public ItemReservaDTO update(ItemReservaDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

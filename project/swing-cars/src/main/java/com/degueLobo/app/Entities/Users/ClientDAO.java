@@ -68,7 +68,7 @@ public class ClientDAO extends DAO<ClientDTO>{
     }
 
     @Override
-    public void update(ClientDTO model) throws SQLException
+    public ClientDTO update(ClientDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -4,6 +4,7 @@
 package com.degueLobo.app.Entities.Autos;
 
 import com.degueLobo.app.Entities.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,7 +94,7 @@ public class ModelDAO extends DAO<ModelDTO>{
     }
 
     @Override
-    public void update(ModelDTO model) throws SQLException
+    public ModelDTO update(ModelDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

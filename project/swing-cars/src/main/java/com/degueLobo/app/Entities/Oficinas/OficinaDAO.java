@@ -4,6 +4,7 @@
 package com.degueLobo.app.Entities.Oficinas;
 
 import com.degueLobo.app.Entities.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,7 +88,7 @@ public class OficinaDAO extends DAO<OficinaDTO>{
     }
 
     @Override
-    public void update(OficinaDTO model) throws SQLException
+    public OficinaDTO update(OficinaDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

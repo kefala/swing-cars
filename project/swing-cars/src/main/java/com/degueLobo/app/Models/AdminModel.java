@@ -58,6 +58,17 @@ public class AdminModel extends Model {
         return newUser;
     }
 
+    public UserDTO editarUsuario(Integer id, String userName, String password, Roles rol) {
+        UserDTO user = new UserDTO(id, userName, password, rol);
+        try {
+            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
+            user = dao.update(user);
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Error al editar el usuario\n" + e.toString());
+        }
+        return user;
+    }
+
     public List<UserDTO> getAdminAndVendedor() {
         List<UserDTO> usersList = Collections.emptyList();
         try {

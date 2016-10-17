@@ -1,6 +1,7 @@
 package com.degueLobo.app.Entities.Autos;
 
 import com.degueLobo.app.Entities.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,7 +88,7 @@ public class MarcaDAO extends DAO<MarcaDTO>{
     }
 
     @Override
-    public void update(MarcaDTO model) throws SQLException
+    public MarcaDTO update(MarcaDTO model) throws SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
