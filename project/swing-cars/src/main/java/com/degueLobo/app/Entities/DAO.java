@@ -15,9 +15,14 @@ public abstract class DAO<MODEL_DTO extends DTO> implements DAOInterface<MODEL_D
         this.TABLE_NAME = tableName;
     }
 
-    public void delete(Integer id) throws SQLException {
+    public boolean delete(Integer id) throws SQLException {
         PreparedStatement st = null;
-        st = this.conn.prepareStatement("DELETE FROM " + getTableName()+ " WHERE id = " + id.toString() + ";");
+        {
+            st = this.conn.prepareStatement("DELETE FROM " + TABLE_NAME + " where id=(?)");
+            st.setInt(1, id);
+            int affectedRows = st.executeUpdate();
+            return affectedRows == 1;
+        }
     };
 
     public void deleteAll() throws SQLException {

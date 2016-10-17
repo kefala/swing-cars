@@ -28,9 +28,12 @@ public class AdminController extends Controller {
         view.addLogOutListener(new LogOutEventListener());
         view.addCommitClienteListener(new CommitClientEventListener());
         view.addCommitUsuarioListener(new CommitUserEventListener());
+        view.addOnShowListener(new OnAdminViewShowEventListener());
+        view.addOnEditEntityListener(new OnEditEntityEventListener());
         AdminToolBar toolbar = new AdminToolBar();
         toolbar.initialize();
         ApplicationManager.getMainAppContainer().setToolBar(toolbar);
+        
     }
     
     private class LogOutEventListener implements ActionListener {
@@ -59,6 +62,33 @@ public class AdminController extends Controller {
                 JOptionPane.showConfirmDialog(ApplicationManager.getMainAppContainer().getContentPane(), "El Cliente no pudo ser ingresado", "Error", JOptionPane.DEFAULT_OPTION);
             }
         }
+    }
+    
+    private class OnAdminViewShowEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            AdminView source = (AdminView) e.getSource();
+            source.pushUserListInfo(model.getAllUsers());
+        }
+    }
+    
+    private class OnEditEntityEventListener implements ActionListener{
+
+        public void actionPerformed(ActionEvent e)
+        {
+            switch(e.getID())
+            {
+                case AdminView.AdminViewEvents.EDIT_USER_FROM_LIST:
+                    editUserFromList(e);
+                    break;
+            }
+        }
+    
+    }
+    
+    private void editUserFromList(ActionEvent e)
+    {
+        UserDTO user = (UserDTO) e.getSource();
+        model.deleteUser(user);
     }
 
 }

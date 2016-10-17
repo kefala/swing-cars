@@ -1,11 +1,10 @@
 /*Avis
-Expression licensePrefix is undefined on line 4, column 3 in Templates/Licenses/license-default.txt.To change this license header, choose License Headers in Project Properties.
-Expression licensePrefix is undefined on line 5, column 3 in Templates/Licenses/license-default.txt.To change this template file, choose Tools | Templates
-Expression licensePrefix is undefined on line 6, column 3 in Templates/Licenses/license-default.txt.and open the template in the editor.
  Lobo/Degue*/
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Entities.Users.UserDTO;
+import com.degueLobo.app.Entities.Users.UserRowInfo;
 import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
@@ -31,6 +30,13 @@ public class AdminView extends View {
     //Posible content screens:
     private InsertClienteContentView insertClientContentView;
     private InsertUsuarioContentView insertUsuarioContentView;
+    private UsersListView userListView;
+    
+    //Model events
+    private ActionListener onShowListener;
+    
+    //Edit/Delete actions
+    private ActionListener onEditEntityListener;
     
     public AdminView(Model m)
     {
@@ -46,12 +52,22 @@ public class AdminView extends View {
         adminSidebar.addLogOutButtonListener(al);
     }
     
+    public void addOnShowListener(ActionListener al) {
+        onShowListener = al;
+    }
+    
+    public void addOnEditEntityListener(ActionListener al) {
+        this.onEditEntityListener = al;
+    }
+    
     @Override
     public void onShow() {
+        onShowListener.actionPerformed(new ActionEvent(this, AdminViewEvents.SHOW_USER_LIST, "onShow"));
     }
 
     @Override
     public void onHide() {
+        
     }
     
     public void addCommitClienteListener(ActionListener al) {
@@ -119,16 +135,26 @@ public class AdminView extends View {
         return null;
     }
     
+    public void pushUserListInfo(List<UserDTO> userList)
+    {
+        if(userListView != null)
+        {
+            String[] columns = (userList != null && userList.size() > 0) ? new UserRowInfo(userList.get(0)).getColumnNames() : null;
+            userListView.dataPushed(columns, userList);
+        }
+    }
+    
     private void clearScreenData() {
+        ApplicationManager.getMainAppContainer().resetContentPanelStatus();
         insertClientContentView = null;
         insertUsuarioContentView = null;
+        userListView = null;
     }
     
     private class NewClientActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             insertClientContentView = new InsertClienteContentView();
-            ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(insertClientContentView);
             
             //aca depende del estado como se hace
@@ -179,13 +205,45 @@ public class AdminView extends View {
     }
 
     private class GoToListUserView implements ActionListener {
-        private UsersListView userListView;
-
         public void actionPerformed(ActionEvent e) {
             clearScreenData();
             userListView = new UsersListView();
+            userListView.addEditActionListener(new EditFromList());
+            userListView.initialize();
             ApplicationManager.getMainAppContainer().resetContentPanelStatus();
             ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
+            onShow();
         }
+    }
+    
+    private class EditFromList implements ActionListener {
+
+        public void actionPerformed(ActionEvent e)
+        {
+            switch(e.getID())
+            {
+                case AdminViewEvents.EDIT_USER_FROM_LIST:
+                    editUserFromList(e);
+                    break;
+            }
+            
+        }
+    }
+    
+    private void editUserFromList(ActionEvent e)
+    {
+        UserDTO user = (UserDTO) e.getSource();
+        //TODO: Solve this
+        int reply = JOptionPane.showConfirmDialog(ApplicationManager.getMainAppContainer(), "Desea borrar a " + user.getUsername(), "Confirm", JOptionPane.YES_NO_OPTION);
+        if(reply == JOptionPane.YES_OPTION)
+        {
+            onEditEntityListener.actionPerformed(e);
+            onShow();
+        }
+    }
+    public abstract class AdminViewEvents 
+    {
+        public static final int SHOW_USER_LIST = 1;
+        public static final int EDIT_USER_FROM_LIST = 1;
     }
 }

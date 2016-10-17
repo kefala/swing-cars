@@ -9,7 +9,10 @@ import com.degueLobo.app.Entities.Users.UserDAO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ConnectionManager;
+import com.degueLobo.app.Managers.ErrorManager;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,34 +20,65 @@ import javax.swing.JOptionPane;
  * @author mjdegue
  */
 public class AdminModel extends Model {
+
+
+    public List<UserDTO> getAllUsers()
+    {
+        List<UserDTO> userList = null;
+        try
+        {
+            userList = new UserDAO(ConnectionManager.GetConnection()).getAll();
+        } catch (SQLException e)
+        {
+        }
+        return userList;
+    }
     
     public ClientDTO ingresarCliente(String userName, String password, String nombre, String dni, String direccion, String telefono) { 
         ClientDTO cliente = new ClientDTO(userName, password, nombre, dni, direccion, telefono);
         ClientDTO newClient = null;
-        
-        try
-        {
+        try {
             ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
             newClient = dao.create(cliente);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, "Error al cargar usuario\n" + e.toString());
         }
-        
         return newClient;
     }
     
     public UserDTO ingresarUsuario(String userName, String password, Roles rol) {
         UserDTO user = new UserDTO(userName, password, rol);
         UserDTO newUser = null;
-        try
-        {
+        try {
             UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
             newUser = dao.create(user);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, "Error al cargar usuario\n" + e.toString());
         }
         return newUser;
+    }
+
+    public List<UserDTO> getAdminAndVendedor() {
+        List<UserDTO> usersList = Collections.emptyList();
+        try {
+            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
+            usersList = userDAO.getAdminAndVendedor();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usersList;
+    }
+    
+    public boolean deleteUser(UserDTO user) {
+        boolean ans = false;
+        try
+        {
+            UserDAO dao = new UserDAO(ConnectionManager.GetConnection());
+            dao.delete(user.getId());
+        } catch (SQLException e)
+        {
+        }
+        
+        return ans;
     }
 }

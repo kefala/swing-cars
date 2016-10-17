@@ -23,7 +23,37 @@ public class UserDAO extends DAO<UserDTO> {
     }
 
     public List<UserDTO> getAll() throws SQLException {
-        return null;
+        List<UserDTO> userList = new ArrayList<UserDTO>();
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM usuario");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) //Should only retrieve one as nombre_usuario is unique
+            {
+                UserDTO user = new UserDTO();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setRol(Roles.getRolById(rs.getInt(4)));
+                userList.add(user);
+            }
+        }
+        catch(SQLException e)
+        {
+            ErrorManager.PopupException(e);
+        }
+        finally
+        {
+            if(conn != null)
+            {
+                try
+                {
+                    conn.close();
+                } catch (SQLException e)
+                {
+                    ErrorManager.PopupException(e);
+                }
+            }
+        }
+        return userList;
     }
 
     public List<UserDTO> getAdminAndVendedor() throws SQLException {
@@ -56,27 +86,23 @@ public class UserDAO extends DAO<UserDTO> {
     {
         UserDTO newModel = null;
         PreparedStatement st = null;
-        try
-        {
+        try {
             st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_usuario, password, tipo_usuario) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             st.setString(1, model.getUsername());
             st.setString(2, model.getPassword());
             st.setInt(3, model.getRol().getId());
             st.executeUpdate();
-            try
-            {
+            try {
                 ResultSet results = st.getGeneratedKeys();
                 results.next();
                 model.setId(results.getInt(1));
                 newModel = model;
             }
-            catch(SQLException e)
-            {
+            catch(SQLException e) {
                 System.err.println("Couldn't retrieve user's id");
                 throw e;
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println("Couldn't insert new user");
             throw e;
         }
@@ -151,4 +177,5 @@ public class UserDAO extends DAO<UserDTO> {
         }
         return user;
     }
+    
 }
