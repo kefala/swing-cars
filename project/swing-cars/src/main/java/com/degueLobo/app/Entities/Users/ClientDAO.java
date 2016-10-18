@@ -4,12 +4,16 @@
 package com.degueLobo.app.Entities.Users;
 
 import com.degueLobo.app.Entities.DAO;
+import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ConnectionManager;
+import com.degueLobo.app.Managers.ErrorManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +27,44 @@ public class ClientDAO extends DAO<ClientDTO>{
         super(conn, "cliente");
     }
 
-    @Override
-    public List<ClientDTO> getAll() throws SQLException
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ClientDTO> getAll() throws SQLException {
+        List<ClientDTO> clientList = new ArrayList<ClientDTO>();
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM cliente");
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) //Should only retrieve one as nombre_usuario is unique
+            {
+                UserDAO userDao = new UserDAO(this.conn);
+                UserDTO user = userDao.find(rs.getInt("id_usuario"));
+
+                ClientDTO cliente = new ClientDTO();
+                cliente.setId(rs.getInt(1));
+                cliente.setDireccion(rs.getString("dirección"));
+                cliente.setDni(rs.getString("dni"));
+                cliente.setName(rs.getString("nombre_completo"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setUser(user);
+                clientList.add(cliente);
+            }
+        }
+        catch(SQLException e)
+        {
+            ErrorManager.PopupException(e);
+        }
+        finally
+        {
+            if(conn != null)
+            {
+                try
+                {
+                    conn.close();
+                } catch (SQLException e)
+                {
+                    ErrorManager.PopupException(e);
+                }
+            }
+        }
+        return clientList;
     }
 
     @Override
@@ -40,8 +78,8 @@ public class ClientDAO extends DAO<ClientDTO>{
             PreparedStatement st = null;
             try
             {
-                st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(nombre_usuario, nombre_completo, dni, direccion, telefono) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-                st.setString(1, model.getUser().getUsername());
+                st = this.conn.prepareStatement("INSERT INTO " + TABLE_NAME + "(id_usuario, nombre_completo, dni, dirección, telefono) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                st.setInt(1, newUser.getId());
                 st.setString(2, model.getName());
                 st.setString(3, model.getDni());
                 st.setString(4, model.getDireccion());

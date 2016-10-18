@@ -33,7 +33,19 @@ public class AdminModel extends Model {
         }
         return userList;
     }
-    
+
+    public List<ClientDTO> getAllClientes()
+    {
+        List<ClientDTO> clientList = null;
+        try
+        {
+            clientList = new ClientDAO(ConnectionManager.GetConnection()).getAll();
+        } catch (SQLException e)
+        {
+        }
+        return clientList;
+    }
+
     public ClientDTO ingresarCliente(String userName, String password, String nombre, String dni, String direccion, String telefono) { 
         ClientDTO cliente = new ClientDTO(userName, password, nombre, dni, direccion, telefono);
         ClientDTO newClient = null;
@@ -92,4 +104,5 @@ public class AdminModel extends Model {
         
         return ans;
     }
+
 }
