@@ -62,5 +62,16 @@ public class EmpleadoModel extends Model {
         return ans;
     }
 
+    public ClientDTO editarCliente(Integer id, String nombre, String dni, String direccion, String telefono, UserDTO user) {
+        ClientDTO cliente = new ClientDTO(id, user, nombre, dni, direccion, telefono);
+        try {
+            ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
+            cliente = dao.update(cliente);
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Error al editar el usuario\n" + e.toString());
+        }
+        return cliente;
+    }
+
 
 }
