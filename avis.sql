@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.15, for Linux (x86_64)
+CREATE DATABASE  IF NOT EXISTS `avis` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `avis`;
+-- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
 --
--- Host: localhost    Database: avis
+-- Host: 127.0.0.1    Database: avis
 -- ------------------------------------------------------
--- Server version	5.7.15-0ubuntu0.16.04.1
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,8 +30,9 @@ CREATE TABLE `cliente` (
   `dni` varchar(20) NOT NULL,
   `dirección` varchar(30) NOT NULL,
   `telefono` varchar(20) NOT NULL,
+  `nombre_completo` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +41,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,17,'dni','direccion','telefono','nombre_U');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +206,7 @@ CREATE TABLE `usuario` (
   `tipo_usuario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_usuario` (`nombre_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +215,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (2,'usuario_random','contraman',1),(3,'usuario_rando2m','contraman',1),(4,'Juan','pass',2),(5,'Peperino','pass',2),(6,'Pepeerino','pass',2),(10,'Pepeeerino','pass',2),(11,'kefala','kefala',1);
+INSERT INTO `usuario` VALUES (2,'usuario_random','1234',1),(3,'usuario_rando2m','contraman',1),(4,'Juancito','pass',2),(5,'Peperino','pass',2),(6,'Pepeerino','pass',2),(10,'Pepeeerino','pass',2),(11,'kefala','kefala',1),(17,'userName','password',3);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-17 19:56:42
+-- Dump completed on 2016-10-18 19:22:41
