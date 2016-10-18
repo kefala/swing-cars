@@ -105,4 +105,30 @@ public class AdminModel extends Model {
         return ans;
     }
 
+    public boolean deleteClient(ClientDTO client) {
+        boolean ans = false;
+        try
+        {
+            ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
+            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
+            dao.delete(client.getId());
+            userDAO.delete(client.getUser().getId());
+        } catch (SQLException e)
+        {
+        }
+
+        return ans;
+    }
+
+    public ClientDTO editarCliente(Integer id, String nombre, String dni, String direccion, String telefono, UserDTO user) {
+        ClientDTO cliente = new ClientDTO(id, user, nombre, dni, direccion, telefono);
+        try {
+            ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
+            cliente = dao.update(cliente);
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Error al editar el usuario\n" + e.toString());
+        }
+        return cliente;
+    }
+
 }

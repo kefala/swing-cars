@@ -23,8 +23,18 @@ public class ClientDTO extends DTO {
         this.dni = dni;
         this.telefono = telefono;
         this.direccion = direccion;
-        user = new UserDTO(userName, password, Roles.CLIENTE);
+        this.user = new UserDTO(userName, password, Roles.CLIENTE);
     }
+
+    public ClientDTO(Integer id, UserDTO user, String nombre, String dni, String direccion, String telefono) {
+        this.setId(id);
+        this.name = nombre;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.user = user;
+    }
+
     public String getName() {
         return name;
     }

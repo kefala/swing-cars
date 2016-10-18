@@ -108,7 +108,31 @@ public class ClientDAO extends DAO<ClientDTO>{
     @Override
     public ClientDTO update(ClientDTO model) throws SQLException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement st = null;
+        try
+        {
+            UserDAO userDao = new UserDAO(this.conn);
+            UserDTO user = userDao.find(model.getUser().getId());
+            model.setUser(user);
+
+            st = this.conn.prepareStatement("UPDATE " + TABLE_NAME + " SET nombre_completo = (?), dni = (?), dirección = (?), telefono = (?) WHERE id = (?)", Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, model.getName());
+            st.setString(2, model.getDni());
+            st.setString(3, model.getDireccion());
+            st.setString(4, model.getTelefono());
+            st.setInt(5, model.getId());
+
+
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 1) {
+                return model;
+            }
+        } catch (SQLException e)
+        {
+            System.err.println("Couldn't insert new user");
+            throw e;
+        }
+        return null;
     }
 
     @Override

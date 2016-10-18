@@ -132,7 +132,20 @@ public class UserDAO extends DAO<UserDTO> {
     }
 
     public UserDTO find(Integer id) throws SQLException {
-        return null;
+        UserDTO user = null;
+        try{
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM usuario WHERE id=(?) LIMIT 1");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()) {
+                user = new UserDTO(rs.getInt(1), rs.getString(2), "", Roles.getRolById(rs.getInt(4)));
+            }
+        }
+        catch(SQLException e)
+        {
+            ErrorManager.PopupException(e);
+        }
+        return user;
     }
     
     public UserDTO GetUserIfValid(String userName, String password)

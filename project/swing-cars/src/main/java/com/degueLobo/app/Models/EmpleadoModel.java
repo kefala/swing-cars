@@ -35,7 +35,32 @@ public class EmpleadoModel extends Model {
         return newClient;
     }
 
+    public List<ClientDTO> getAllClientes()
+    {
+        List<ClientDTO> clientList = null;
+        try
+        {
+            clientList = new ClientDAO(ConnectionManager.GetConnection()).getAll();
+        } catch (SQLException e)
+        {
+        }
+        return clientList;
+    }
 
+    public boolean deleteClient(ClientDTO client) {
+        boolean ans = false;
+        try
+        {
+            ClientDAO dao = new ClientDAO(ConnectionManager.GetConnection());
+            UserDAO userDAO = new UserDAO(ConnectionManager.GetConnection());
+            dao.delete(client.getId());
+            userDAO.delete(client.getUser().getId());
+        } catch (SQLException e)
+        {
+        }
+
+        return ans;
+    }
 
 
 }
