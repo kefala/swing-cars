@@ -3,11 +3,13 @@
 
 package com.degueLobo.app.Views;
 
+import com.degueLobo.app.Entities.Users.ClientDTO;
 import com.degueLobo.app.Entities.Users.UserDTO;
 import com.degueLobo.app.Entities.Users.UserRowInfo;
 import com.degueLobo.app.Entities.Utils.Roles;
 import com.degueLobo.app.Managers.ApplicationManager;
 import com.degueLobo.app.Models.Model;
+import com.degueLobo.app.Templates.ContentView.ClientListView;
 import com.degueLobo.app.Templates.ContentView.InsertClienteContentView;
 import com.degueLobo.app.Templates.ContentView.InsertUsuarioContentView;
 import com.degueLobo.app.Templates.ContentView.UsersListView;
@@ -31,6 +33,7 @@ public class AdminView extends View {
     private InsertClienteContentView insertClientContentView;
     private InsertUsuarioContentView insertUsuarioContentView;
     private UsersListView userListView;
+    private ClientListView clientListView;
     
     //Model events
     private ActionListener onShowListener;
@@ -46,6 +49,7 @@ public class AdminView extends View {
         adminSidebar.addNewClientButtonListener(new NewClientActionListener());
         adminSidebar.addNewUserButtonListener(new NewUsuarioActionListener());
         adminSidebar.addUsersViewButtonListener(new GoToListUserView());
+        adminSidebar.addClientsViewButtonListener(new GoToListClientView());
     }
     
     public void addLogOutListener(ActionListener al) {
@@ -215,7 +219,19 @@ public class AdminView extends View {
             onShow();
         }
     }
-    
+
+    private class GoToListClientView implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            clearScreenData();
+            clientListView = new ClientListView();
+            clientListView.addEditActionListener(new EditFromList());
+            clientListView.initialize();
+            ApplicationManager.getMainAppContainer().resetContentPanelStatus();
+            ApplicationManager.getMainAppContainer().pushContentPanel(userListView);
+            onShow();
+        }
+    }
+
     private class EditFromList implements ActionListener {
 
         public void actionPerformed(ActionEvent e)
@@ -229,7 +245,19 @@ public class AdminView extends View {
             
         }
     }
-    
+
+    private void editClientFromList(ActionEvent e)
+    {
+        ClientDTO client = (ClientDTO) e.getSource();
+        //TODO: Solve this
+        int reply = JOptionPane.showConfirmDialog(ApplicationManager.getMainAppContainer(), "Desea borrar a " + client.getUser().getUsername(), "Confirm", JOptionPane.YES_NO_OPTION);
+        if(reply == JOptionPane.YES_OPTION)
+        {
+            onEditEntityListener.actionPerformed(e);
+            onShow();
+        }
+    }
+
     private void editUserFromList(ActionEvent e)
     {
         UserDTO user = (UserDTO) e.getSource();
